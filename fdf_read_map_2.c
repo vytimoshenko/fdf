@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_separate_data.c                                :+:      :+:    :+:   */
+/*   fdf_read_map_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/07 03:55:20 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/07 19:04:30 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/13 03:36:53 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	check_color(char *color)
 		prefix = ft_strnew(2);
 		prefix[0] = '0';
 		prefix[1] = 'x';
-		if (!(ft_strstr(color, prefix)))
+		if (!(ft_strstr(color, (char *)prefix)))
 			ft_put_error("fdf: color data is wrong");
 		ft_strdel(&prefix);
 		free(prefix);
@@ -86,39 +86,39 @@ int		atoi_color(char *str)
 	return (result);
 }
 
-void	separate_color(t_view *view, char **split_line, int x, int y)
+void	separate_color(t_map *map, char **split_line, int x, int y)
 {
 	char	**separate_color;
 
 	separate_color = ft_strsplit(split_line[x], ',');
 	check_color(separate_color[1]);
-	view->xyz[y][x] = atoi_mod(separate_color[0]);
-	view->clr[y][x] = atoi_color(separate_color[1]);
+	map->xyz[y][x] = atoi_mod(separate_color[0]);
+	map->clr[y][x] = atoi_color(separate_color[1]);
 	ft_arrdel(separate_color);
 	free(separate_color);
 }
 
-void	save_map_line(t_view *view, char **split_line, int y)
+void	save_map_line(t_map *map, char **split_line, int y)
 {
 	int		x;
 	int		color;
 
 	x = -1;
-	while (++x < view->x_size)
+	while (++x < map->x_size)
 	{
 		color = ft_wrdcnt(split_line[x], ',') - 1;
 		if (color == 0)
 		{
-			view->xyz[y][x] = atoi_mod(split_line[x]);
-			view->clr[y][x] = 0;
+			map->xyz[y][x] = atoi_mod(split_line[x]);
+			map->clr[y][x] = 0;
 		}
 		else if (color == 1)
 		{
-			separate_color(view, split_line, x, y);
-			view->has_color = 1;
+			separate_color(map, split_line, x, y);
+			map->has_color = 1;
 		}
 		else
 			ft_put_error("fdf: wrong map file data");
-		get_max_min_z(view, x, y);
+		get_max_min_z(map, x, y);
 	}
 }

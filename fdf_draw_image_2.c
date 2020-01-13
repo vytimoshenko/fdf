@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 00:44:12 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/10 20:07:40 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/12 22:03:38 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,25 @@ t_line	*init_line(void)
 	return (line);
 }
 
-void	get_sin_cos(t_view *view)
+void	get_sin_cos(t_status *status)
 {
-	view->sin_x = sin(view->x_angle);
-	view->sin_y = sin(view->y_angle);
-	view->sin_z = sin(view->z_angle);
-	view->cos_x = cos(view->x_angle);
-	view->cos_y = cos(view->y_angle);
-	view->cos_z = cos(view->z_angle);
+	status->sin_x = sin(status->x_angle);
+	status->sin_y = sin(status->y_angle);
+	status->sin_z = sin(status->z_angle);
+	status->cos_x = cos(status->x_angle);
+	status->cos_y = cos(status->y_angle);
+	status->cos_z = cos(status->z_angle);
 }
 
-void	transform_line(t_view *view, t_line *line)
+void	transform_line(t_status *status, t_line *line)
 {
-	scale_line(view, line);
-	x_rotate_line(view, line);
-	y_rotate_line(view, line);
-	z_rotate_line(view, line);
-	if (view->perspective_projection == 1)
-		get_perspective(view, line);
-	shift_line(view, line);
+	scale_line(status, line);
+	x_rotate_line(status, line);
+	y_rotate_line(status, line);
+	z_rotate_line(status, line);
+	if (status->perspective_projection == 1)
+		get_perspective(status, line);
+	shift_line(status, line);
 }
 
 void	destroy_line(t_line *line)

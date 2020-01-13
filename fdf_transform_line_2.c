@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_output.c                                       :+:      :+:    :+:   */
+/*   fdf_transform_line_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 17:19:51 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/10 20:14:47 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/13 03:40:33 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_perspective(t_view *view, t_line *line)
+void	get_perspective(t_status *status, t_line *line)
 {
-	if (line->start->z < view->persp_rate && line->end->z < view->persp_rate)
+	if (line->start->z < status->persp_rate &&
+	line->end->z < status->persp_rate)
 	{
-		line->start->x *= view->persp_rate /
-		(view->persp_rate - line->start->z);
-		line->start->y *= view->persp_rate /
-		(view->persp_rate - line->start->z);
-		line->end->x *= view->persp_rate / (view->persp_rate - line->end->z);
-		line->end->y *= view->persp_rate / (view->persp_rate - line->end->z);
+		line->start->x *= status->persp_rate /
+		(status->persp_rate - line->start->z);
+		line->start->y *= status->persp_rate /
+		(status->persp_rate - line->start->z);
+		line->end->x *= status->persp_rate /
+		(status->persp_rate - line->end->z);
+		line->end->y *= status->persp_rate /
+		(status->persp_rate - line->end->z);
 	}
 	else
 	{
@@ -32,7 +35,7 @@ void	get_perspective(t_view *view, t_line *line)
 	}
 }
 
-int		need_trim_line(t_view *view, t_line *line)
+int		need_trim_line(t_line *line)
 {
 	if ((line->start->x < IMG_INDT_X && line->end->x < IMG_INDT_X) ||
 	(line->start->x > IMG_SIZE_X + IMG_INDT_X &&
@@ -43,23 +46,6 @@ int		need_trim_line(t_view *view, t_line *line)
 		return (1);
 	else
 		return (0);
-}
-
-void	init_z_buffer(t_view *view)
-{
-	if (!(view->z_buffer = (int *)malloc(sizeof(int) *
-	IMG_SIZE_X * IMG_SIZE_Y)))
-		ft_put_errno(PROGRAM_NAME);
-	clean_z_buffer(view);
-}
-
-void	clean_z_buffer(t_view *view)
-{
-	int i;
-
-	i = -1;
-	while (++i < IMG_SIZE_X * IMG_SIZE_Y)
-		view->z_buffer[i] = -2147483648;
 }
 
 void	put_pixel(t_view *view, t_line *line)

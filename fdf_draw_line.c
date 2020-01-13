@@ -6,25 +6,25 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:53:42 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/10 20:05:57 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/13 03:23:09 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	draw_current_point(t_view *view, t_line *line, int x, int y)
+void	draw_current_point(t_global *global, t_line *line, int x, int y)
 {
 	line->current->x = x;
 	line->current->y = y;
 	line->current->z = (line->start->z + line->end->z) / 2;
-	if (view->color_scheme != 2)
+	if (global->status->color_scheme != 2)
 		line->current->color = get_gradient(line);
 	else
 		line->current->color = line->start->color;
-	put_pixel(view, line);
+	put_pixel(global->view, line);
 }
 
-void	draw_line_low(t_view *view, t_line *line)
+void	draw_line_low(t_global *global, t_line *line)
 {
 	int		x;
 	int		y;
@@ -48,11 +48,11 @@ void	draw_line_low(t_view *view, t_line *line)
 			d = d - 2 * line->dx;
 		}
 		d = d + 2 * line->dy;
-		draw_current_point(view, line, x, y);
+		draw_current_point(global, line, x, y);
 	}
 }
 
-void	draw_line_high(t_view *view, t_line *line)
+void	draw_line_high(t_global *global, t_line *line)
 {
 	int		x;
 	int		y;
@@ -76,7 +76,7 @@ void	draw_line_high(t_view *view, t_line *line)
 			d = d - 2 * line->dy;
 		}
 		d = d + 2 * line->dx;
-		draw_current_point(view, line, x, y);
+		draw_current_point(global, line, x, y);
 	}
 }
 
@@ -103,7 +103,7 @@ void	swap_line_ends(t_line *line)
 	line->dy = line->end->y - line->start->y;
 }
 
-void	draw_line(t_view *view, t_line *line)
+void	draw_line(t_global *global, t_line *line)
 {
 	if (line)
 	{
@@ -114,13 +114,13 @@ void	draw_line(t_view *view, t_line *line)
 		{
 			if (line->start->x > line->end->x)
 				swap_line_ends(line);
-			draw_line_low(view, line);
+			draw_line_low(global, line);
 		}
 		else
 		{
 			if (line->start->y > line->end->y)
 				swap_line_ends(line);
-			draw_line_high(view, line);
+			draw_line_high(global, line);
 		}
 	}
 }

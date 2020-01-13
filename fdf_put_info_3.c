@@ -6,11 +6,31 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 03:05:11 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/10 03:06:32 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/12 20:46:40 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	put_mouse_position(t_status *status, t_view *view)
+{
+	int		pos_x;
+	int		pos_y;
+	char	*str;
+
+	pos_x = IMG_INDT_X + 20;
+	pos_y = WIN_SIZE_Y - 40;
+	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x, pos_y,
+	TEXT_COLOR, "X:");
+	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x + 20, pos_y,
+	TEXT_COLOR, str = ft_itoa(status->x_mouse));
+	free(str);
+	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x + 80, pos_y,
+	TEXT_COLOR, "Y:");
+	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x + 100, pos_y,
+	TEXT_COLOR, str = ft_itoa(status->y_mouse));
+	free(str);
+}
 
 void	put_control_keys_1(t_view *view)
 {
@@ -56,24 +76,4 @@ void	put_control_keys_2(t_view *view)
 	TEXT_COLOR, "Reset:       R");
 	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x, pos_y + 350,
 	TEXT_COLOR, "Exit:        ESC");
-}
-
-void	put_mouse_position(t_view *view)
-{
-	int		pos_x;
-	int		pos_y;
-	char	*str;
-
-	pos_x = IMG_INDT_X + 20;
-	pos_y = WIN_SIZE_Y - 40;
-	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x, pos_y,
-	TEXT_COLOR, "X:");
-	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x + 20, pos_y,
-	TEXT_COLOR, str = ft_itoa(view->x_mouse));
-	free(str);
-	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x + 80, pos_y,
-	TEXT_COLOR, "Y:");
-	mlx_string_put(view->mlx_ptr, view->win_ptr, pos_x + 100, pos_y,
-	TEXT_COLOR, str = ft_itoa(view->y_mouse));
-	free(str);
 }

@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_main.c                                         :+:      :+:    :+:   */
+/*   fdf_get_init_view.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 17:53:21 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 02:00:28 by mperseus         ###   ########.fr       */
+/*   Created: 2020/01/13 01:36:16 by mperseus          #+#    #+#             */
+/*   Updated: 2020/01/13 03:42:21 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		main(int argc, char **argv)
+void	clear_background(t_view *view)
 {
-	t_map		*map;
-	t_status	*status;
-	t_view		*view;
-	t_global	*global;
+	int i;
 
-	if (argc != 2)
-		ft_put_error("usage: fdf map_name.fdf");
-	map = init_struct_map();
-	check_map(map, argv[1]);
-	read_map(map, argv[1]);
-	status = init_struct_status(map);
-	view = init_struct_view();
-	global = init_struct_global(map, status, view);
-	run_mlx(global);
-	exit(0);
+	i = -1;
+	while (++i < IMG_SIZE_X * IMG_SIZE_Y)
+		view->data[i] = BACK_COLOR;
+}
+
+void	init_z_buffer(t_view *view)
+{
+	if (!(view->z_buffer = (int *)malloc(sizeof(int)
+	* IMG_SIZE_X * IMG_SIZE_Y)))
+		ft_put_errno(PROGRAM_NAME);
+	clean_z_buffer(view);
+}
+
+void	clean_z_buffer(t_view *view)
+{
+	int i;
+
+	i = -1;
+	while (++i < IMG_SIZE_X * IMG_SIZE_Y)
+		view->z_buffer[i] = -2147483648;
 }

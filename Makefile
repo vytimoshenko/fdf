@@ -6,7 +6,7 @@
 #    By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 19:45:56 by hlorrine          #+#    #+#              #
-#    Updated: 2020/01/10 20:18:38 by mperseus         ###   ########.fr        #
+#    Updated: 2020/01/13 03:04:01 by mperseus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,17 @@ HDR = 		fdf.h
 
 SRC = 		fdf_main.c				\
 			fdf_check_map.c			\
-			fdf_read_map.c			\
-			fdf_separate_data.c		\
-			fdf_create_line_1.c		\
-			fdf_create_line_2.c		\
-			fdf_transform_line.c	\
-			fdf_get_color.c 		\
+			fdf_read_map_1.c		\
+			fdf_read_map_2.c		\
+			fdf_init_struct.c		\
+			fdf_get_init_view.c		\
+			fdf_get_init_status.c	\
+			fdf_draw_image_1.c		\
+			fdf_draw_image_2.c		\
+			fdf_transform_line_1.c	\
+			fdf_transform_line_2.c	\
 			fdf_draw_line.c			\
-			fdf_output.c			\
+			fdf_get_color.c 		\
 			fdf_run_mlx.c			\
 			fdf_mlx_hooks.c 		\
 			fdf_control_1.c 		\
