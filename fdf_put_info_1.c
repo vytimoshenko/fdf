@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:27:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 01:58:22 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:49:03 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ void	put_map_summary_3(t_map *map, t_view *view)
 {
 	int		pos_x;
 	int		pos_y;
-	char	*str;
 
 	pos_x = WIN_SIZE_X - 340;
 	pos_y = 50;

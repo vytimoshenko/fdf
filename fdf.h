@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 03:45:44 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/13 18:00:03 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,8 +255,7 @@ void			control_projections(t_status *status, int key);
 void			straight_projections(t_status *status);
 void			isometric_projections(t_status *status);
 void			control_perspective(t_status *status, int key);
-
-void			control_colors(t_map *map, t_status *status, int key);
+void			control_colors(t_map *map, t_status *status);
 
 void			put_info_to_window(t_map *map, t_status *status, t_view *view);
 void			put_map_summary_1(t_map *map, t_view *view);

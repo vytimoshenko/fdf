@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 22:52:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/12 20:35:37 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:52:19 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,14 @@ void	control_perspective(t_status *status, int key)
 	if (key == PAGE_DOWN && status->perspective_projection == 1 &&
 	status->persp_rate < INIT_PERSPECTIVE_RATE)
 		status->persp_rate *= 2;
+}
+
+void	control_colors(t_map *map, t_status *status)
+{
+	if (status->color_scheme != 4)
+		status->color_scheme++;
+	else
+		status->color_scheme = 0;
+	if (status->color_scheme == 0 && map->has_color == 0)
+		status->color_scheme++;
 }

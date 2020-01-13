@@ -6,7 +6,7 @@
 #    By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 19:45:56 by hlorrine          #+#    #+#              #
-#    Updated: 2020/01/13 03:04:01 by mperseus         ###   ########.fr        #
+#    Updated: 2020/01/13 17:52:38 by mperseus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ SRC = 		fdf_main.c				\
 			fdf_read_map_1.c		\
 			fdf_read_map_2.c		\
 			fdf_init_struct.c		\
-			fdf_get_init_view.c		\
 			fdf_get_init_status.c	\
+			fdf_get_init_view.c		\
 			fdf_draw_image_1.c		\
 			fdf_draw_image_2.c		\
 			fdf_transform_line_1.c	\
@@ -31,7 +31,6 @@ SRC = 		fdf_main.c				\
 			fdf_mlx_hooks.c 		\
 			fdf_control_1.c 		\
 			fdf_control_2.c 		\
-			fdf_control_3.c 		\
 			fdf_put_info_1.c		\
 			fdf_put_info_2.c		\
 			fdf_put_info_3.c		\
@@ -43,7 +42,8 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			make -C libft
-			gcc -Ofast -o $(NAME) $(SRC) -L./libft -lft -L/usr/local/lib/ \
+			gcc -Wall -Wextra -Werror -Ofast -o $(NAME) $(SRC)\
+			-L./libft -lft -L/usr/local/lib/ \
 			-lmlx -framework OpenGL -framework AppKit -lpthread
 
 %.o: %.c

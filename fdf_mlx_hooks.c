@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 19:44:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 02:53:07 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/13 17:54:22 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int		mouse_key_press(int key, int x, int y, void *param)
 {
 	t_global	*global;
 
+	(void)x;
+	(void)y;
 	global = (t_global *)param;
 	if (key == MIDDLE_MOUSE_BUTTON)
 		global->status->middle_mouse_button = 1;
@@ -40,6 +42,8 @@ int		mouse_key_release(int key, int x, int y, void *param)
 {
 	t_global	*global;
 
+	(void)x;
+	(void)y;
 	global = (t_global *)param;
 	if (key == MIDDLE_MOUSE_BUTTON)
 		global->status->middle_mouse_button = 0;
@@ -57,7 +61,7 @@ int		keyboard_key_press(int key, void *param)
 	control_projections(global->status, key);
 	control_perspective(global->status, key);
 	if (key == C)
-		control_colors(global->map, global->status, key);
+		control_colors(global->map, global->status);
 	if (key == R)
 		full_reset(global->map, global->status);
 	redraw(global);
