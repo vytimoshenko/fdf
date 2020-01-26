@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:44:45 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 01:51:31 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/14 21:50:06 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	calc_scale(t_map *map, t_status *status)
 		sf = (IMG_SIZE_Y - 10) / (1.2 * (map->y_size - 1));
 	status->sf = sf;
 	status->sf_init = sf;
+	status->sf_z_init = 1;
+	if (map->z_size > 1000)
+		status->sf_z_init = 0.01;
+
 }
 
 void	reset_shift_and_scale(t_status *status)
@@ -28,12 +32,13 @@ void	reset_shift_and_scale(t_status *status)
 	status->x_shift = 0;
 	status->y_shift = 0;
 	status->sf = status->sf_init;
+	
 }
 
 void	full_reset(t_map *map, t_status *status)
 {
 	reset_shift_and_scale(status);
-	status->sf_z = INIT_SCALE_FACTOR_Z;
+	status->sf_z = status->sf_z_init;
 	status->persp_rate = INIT_PERSPECTIVE_RATE;
 	if (map->has_color == 1)
 		status->color_scheme = 0;

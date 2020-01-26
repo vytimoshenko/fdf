@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 19:44:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 17:54:22 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/14 21:58:40 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		mouse_key_press(int key, int x, int y, void *param)
 	if (key == MIDDLE_MOUSE_BUTTON)
 		global->status->middle_mouse_button = 1;
 	if (key == MOUSE_SCROLL_UP || key == MOUSE_SCROLL_DOWN)
-		control_scales(global->status, key);
+		control_scale(global->status, key);
 	redraw(global);
 	return (0);
 }
@@ -57,7 +57,8 @@ int		keyboard_key_press(int key, void *param)
 	global = (t_global *)param;
 	control_shift(global->status, key);
 	control_rotation(global->status, key);
-	control_scales(global->status, key);
+	control_scale(global->status, key);
+	control_z_scale(global->status, key);
 	control_projections(global->status, key);
 	control_perspective(global->status, key);
 	if (key == C)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_run_mlx.c                                      :+:      :+:    :+:   */
+/*   fdf_draw.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:25:01 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 03:31:37 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/26 20:07:15 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	redraw(t_global *global)
 	global->view->img_ptr, IMG_INDT_X, IMG_INDT_Y);
 }
 
-void	run_mlx(t_global *global)
+void	draw(t_global *global)
 {
 	mlx_hook(global->view->win_ptr, 2, 0, keyboard_key_press, (void *)global);
 	mlx_hook(global->view->win_ptr, 4, 0, mouse_key_press, (void *)global);

@@ -6,22 +6,26 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:34:38 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 03:41:41 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/26 20:04:19 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map		*init_struct_map(void)
+t_map		*init_map(int argc, char **argv)
 {
 	t_map *map;
 
+	if (argc != 2)
+		ft_put_error("usage: fdf map_name.fdf");
 	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))))
 		ft_put_errno(PROGRAM_NAME);
+	check_map(map, argv[1]);
+	read_map(map, argv[1]);
 	return (map);
 }
 
-t_status	*init_struct_status(t_map *map)
+t_status	*init_status(t_map *map)
 {
 	t_status *status;
 
@@ -32,7 +36,7 @@ t_status	*init_struct_status(t_map *map)
 	return (status);
 }
 
-t_view		*init_struct_view(void)
+t_view		*init_view(void)
 {
 	t_view *view;
 
@@ -53,14 +57,15 @@ t_view		*init_struct_view(void)
 	return (view);
 }
 
-t_global	*init_struct_global(t_map *map, t_status *status, t_view *view)
+t_global	*init_global(int argc, char **argv)
 {
 	t_global *global;
 
 	if (!(global = (t_global *)ft_memalloc(sizeof(t_global))))
 		ft_put_errno(PROGRAM_NAME);
-	global->map = map;
-	global->status = status;
-	global->view = view;
+	global->map = init_map(argc, argv);
+	global->status = init_status(global->map);
+	global->view = init_view();
 	return (global);
 }
+	

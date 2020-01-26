@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 18:00:03 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/26 20:12:56 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # define IMG_INDT_Y 10
 
 # define INIT_SCALE_FACTOR		1
-# define INIT_SCALE_FACTOR_Z	1
 # define INIT_PERSPECTIVE_RATE	2000
 
 # define TEXT_COLOR  	0xFFFFFF
@@ -123,6 +122,7 @@ typedef struct	s_status
 	float	sf;
 	float	sf_init;
 	float	sf_z;
+	float	sf_z_init;
 	int		persp_rate;
 	int		color_scheme;
 
@@ -174,10 +174,10 @@ typedef struct	s_global
 
 int				main(int argc, char **argv);
 
-t_map			*init_struct_map(void);
-t_status		*init_struct_status(t_map *map);
-t_view			*init_struct_view(void);
-t_global		*init_struct_global(t_map *map, t_status *status, t_view *view);
+t_map			*init_map(int argc, char **argv);
+t_status		*init_status(t_map *map);
+t_view			*init_view(void);
+t_global		*init_global(int argc, char **argv);
 
 void			check_map(t_map *map, char *file_name);
 void			check_line(t_map *map, char *line);
@@ -223,8 +223,8 @@ void			draw_line(t_global *global, t_line *line);
 void			swap_line_ends(t_line *line);
 void			draw_line_low(t_global *global, t_line *line);
 void			draw_line_high(t_global *global, t_line *line);
-void			draw_current_point(t_global *global, t_line *line,
-				int x, int y);
+void			draw_current_point(t_global *global, t_line *line, int x,
+				int y);
 
 double			get_grade(int start, int end, int current);
 int				get_light(int start, int end, double grade);
@@ -237,7 +237,7 @@ int				need_trim_line(t_line *line);
 void			put_pixel(t_view *view, t_line *line);
 
 void			redraw(t_global *global);
-void			run_mlx(t_global *global);
+void			draw(t_global *global);
 
 int				keyboard_key_press(int key, void *param);
 int				mouse_key_press(int key, int x, int y, void *param);
@@ -249,12 +249,14 @@ void			get_cursor_position(t_status *status, int x, int y);
 void			control_shift(t_status *status, int key);
 void			control_mouse_shift(t_status *status, int x, int y);
 void			control_rotation(t_status *status, int key);
-void			control_scales(t_status *status, int key);
 
 void			control_projections(t_status *status, int key);
 void			straight_projections(t_status *status);
 void			isometric_projections(t_status *status);
 void			control_perspective(t_status *status, int key);
+
+void			control_scale(t_status *status, int key);
+void			control_z_scale(t_status *status, int key);
 void			control_colors(t_map *map, t_status *status);
 
 void			put_info_to_window(t_map *map, t_status *status, t_view *view);
