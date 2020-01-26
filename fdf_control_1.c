@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/14 21:56:09 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/01/26 22:33:31 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 void	get_cursor_position(t_status *status, int x, int y)
 {
 	status->x_mouse = x - IMG_INDT_X;
-	if (x < IMG_INDT_X || x > IMG_INDT_X + IMG_SIZE_X)
-		status->x_mouse = 0;
 	status->y_mouse = y - IMG_INDT_Y;
-	if (y < IMG_INDT_Y || y > IMG_INDT_Y + IMG_SIZE_Y)
+	if (x < IMG_INDT_X || x > IMG_INDT_X + IMG_SIZE_X ||
+	y < IMG_INDT_Y || y > IMG_INDT_Y + IMG_SIZE_Y)
+	{
+		status->x_mouse = 0;
 		status->y_mouse = 0;
+	}
 }
 
 void	control_shift(t_status *status, int key)
