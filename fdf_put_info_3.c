@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 03:05:11 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 03:24:45 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 20:18:24 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	put_control_keys_1(t_mlx *mlx)
 	int pos_y;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 670;
+	pos_y = 720;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 70, pos_y, TEXT_COLOR,
 	"CONTROL");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 30, TEXT_COLOR,
@@ -41,7 +41,7 @@ void	put_control_keys_2(t_mlx *mlx)
 	int pos_y;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 670;
+	pos_y = 720;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 180, TEXT_COLOR,
 	"Z scale:     Z/X");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 210, TEXT_COLOR,
@@ -65,7 +65,7 @@ void	put_render_info_1(t_mlx *mlx)
 	char	*str;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 1120;
+	pos_y = 1170;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 90, pos_y, TEXT_COLOR,
 	"RENDER");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 30, TEXT_COLOR,
@@ -90,7 +90,7 @@ void	put_render_info_2(t_mlx *mlx)
 	char	*str;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 1120;
+	pos_y = 1170;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 80, TEXT_COLOR,
 	"Frames:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 80, TEXT_COLOR,

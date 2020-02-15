@@ -37,3 +37,12 @@ void	clean_z_buffer(t_mlx *mlx)
 	while (++i < IMG_SIZE_W * IMG_SIZE_H)
 		mlx->z_buffer[i] = -2147483648;
 }
+
+void	clean_mlx(t_mlx *mlx)
+{
+	if (mlx)
+	{
+		mlx_destroy_image(mlx->mlx, mlx->img);
+		mlx_destroy_window(mlx->mlx, mlx->win);
+	}
+}

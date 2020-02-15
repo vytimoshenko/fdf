@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 17:19:51 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 03:31:28 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 19:15:34 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,10 @@ void	put_pixel(t_mlx *mlx, t_line *line)
 {
 	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 	
-	pthread_mutex_lock(&mutex);
 	if (line->current->x > IMG_INDT_W && line->current->x < IMG_SIZE_W
 	&& line->current->y > IMG_INDT_W && line->current->y < IMG_SIZE_H)
 	{
+		pthread_mutex_lock(&mutex);
 		if (mlx->z_buffer[(int)(IMG_SIZE_W * (line->current->y - 1) +
 		line->current->x)] < line->current->z)
 		{
@@ -64,6 +64,6 @@ void	put_pixel(t_mlx *mlx, t_line *line)
 			mlx->z_buffer[(int)(IMG_SIZE_W * (line->current->y - 1) +
 		line->current->x)] = line->current->z;
 		}
+		pthread_mutex_unlock(&mutex);
 	}
-	pthread_mutex_unlock(&mutex);
 }

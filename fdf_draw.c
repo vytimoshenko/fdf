@@ -6,13 +6,23 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:25:01 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 04:14:03 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 20:06:24 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	redraw(t_global *global)
+void	loop(t_global *global)
+{
+	mlx_hook(global->mlx->win, 2, 0, keyboard_key_press, global);
+	mlx_hook(global->mlx->win, 4, 0, mouse_key_press, global);
+	mlx_hook(global->mlx->win, 5, 0, mouse_key_release, global);
+	mlx_hook(global->mlx->win, 6, 0, mouse_move, global);
+	mlx_hook(global->mlx->win, 17, 0, close_window, global);
+	mlx_loop(global->mlx->mlx);
+}
+
+void	draw(t_global *global)
 {
 	struct timeval	start;
 	struct timeval	end;
@@ -21,21 +31,19 @@ void	redraw(t_global *global)
 	mlx_clear_window(global->mlx->mlx, global->mlx->win);
 	clear_background(global->mlx);
 	draw_image(global);
-	put_info_to_window(global->map, global->status, global->mlx);
+	put_info_to_window(global);
 	mlx_put_image_to_window(global->mlx->mlx, global->mlx->win,
 	global->mlx->img, IMG_INDT_W, IMG_INDT_H);
 	gettimeofday(&end, NULL);
 	count_frames(global->mlx, start, end);
 }
 
-void	loop(t_global *global)
+void	update_info_only(t_global *global)
 {
-	mlx_hook(global->mlx->win, 2, 0, keyboard_key_press, (void *)global);
-	mlx_hook(global->mlx->win, 4, 0, mouse_key_press, (void *)global);
-	mlx_hook(global->mlx->win, 5, 0, mouse_key_release, (void *)global);
-	mlx_hook(global->mlx->win, 6, 0, mouse_move, (void *)global);
-	mlx_hook(global->mlx->win, 17, 0, close_window, NULL);
-	mlx_loop(global->mlx->mlx);
+	mlx_clear_window(global->mlx->mlx, global->mlx->win);
+	mlx_put_image_to_window(global->mlx->mlx, global->mlx->win,
+	global->mlx->img, IMG_INDT_W, IMG_INDT_H);
+	put_info_to_window(global);
 }
 
 void	count_frames(t_mlx *mlx, struct timeval start, struct timeval end)

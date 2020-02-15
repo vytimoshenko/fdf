@@ -6,73 +6,75 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 19:44:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/14 21:58:40 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 20:12:25 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int		mouse_move(int x, int y, void *param)
+int		mouse_move(int x, int y, t_global *global)
 {
-	t_global	*global;
-
-	global = (t_global *)param;
-	get_cursor_position(global->status, x, y);
+	get_mouse_position(global->status, x, y);
 	control_mouse_shift(global->status, x, y);
-	redraw(global);
+	if (global->status->middle_mouse_button)
+		draw(global);
+	else
+		update_info_only(global);
 	return (0);
 }
 
-int		mouse_key_press(int key, int x, int y, void *param)
+int		mouse_key_press(int key, int x, int y, t_global *global)
 {
-	t_global	*global;
-
 	(void)x;
 	(void)y;
-	global = (t_global *)param;
 	if (key == MIDDLE_MOUSE_BUTTON)
 		global->status->middle_mouse_button = 1;
-	if (key == MOUSE_SCROLL_UP || key == MOUSE_SCROLL_DOWN)
+	else if (key == MOUSE_SCROLL_UP || key == MOUSE_SCROLL_DOWN)
 		control_scale(global->status, key);
-	redraw(global);
+	else
+		return (0);
+	draw(global);
 	return (0);
 }
 
-int		mouse_key_release(int key, int x, int y, void *param)
+int		mouse_key_release(int key, int x, int y, t_global *global)
 {
-	t_global	*global;
-
 	(void)x;
 	(void)y;
-	global = (t_global *)param;
 	if (key == MIDDLE_MOUSE_BUTTON)
 		global->status->middle_mouse_button = 0;
 	return (0);
 }
 
-int		keyboard_key_press(int key, void *param)
+int		keyboard_key_press(int key,t_global *global)
 {
-	t_global	*global;
-
-	global = (t_global *)param;
-	control_shift(global->status, key);
-	control_rotation(global->status, key);
-	control_scale(global->status, key);
-	control_z_scale(global->status, key);
-	control_projections(global->status, key);
-	control_perspective(global->status, key);
-	if (key == C)
+	if (key == A || key == D || key == W || key == S)
+		control_shift(global->status, key);
+	else if (key == ARROW_UP || key == ARROW_DOWN || key == ARROW_RIGHT ||
+	key == ARROW_LEFT || key == MORE || key == LESS)
+		control_rotation(global->status, key);
+	else if (key == PLUS || key == MINUS)
+		control_scale(global->status, key);
+	else if (key == Z || key == X)
+		control_z_scale(global->status, key);
+	else if (key == RETURN || key == SPACE)
+		control_projections(global->status, key);
+	else if (key == P || key == PAGE_UP || key == PAGE_DOWN)
+		control_perspective(global->status, key);
+	else if (key == C)
 		control_colors(global->map, global->status);
-	if (key == R)
+	else if (key == R)
 		full_reset(global->map, global->status);
-	redraw(global);
-	if (key == ESC)
-		exit(0);
+	else if (key == ESC)
+		close_window(global);
+	else
+		return (0);
+	draw(global);
 	return (0);
 }
 
-int		close_window(void *param)
+int		close_window(t_global *global)
 {
-	(void)param;
+	clean_mlx(global->mlx);
 	exit(0);
 }

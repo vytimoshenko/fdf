@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 04:14:47 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 20:06:30 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,6 +212,7 @@ void			full_reset(t_map *map, t_status *status);
 void			clear_background(t_mlx *mlx);
 void			init_z_buffer(t_mlx *mlx);
 void			clean_z_buffer(t_mlx *mlx);
+void			clean_mlx(t_mlx *mlx);
 
 void			draw_image(t_global *global);
 void			*create_verticals(void *global);
@@ -248,18 +249,19 @@ void			get_perspective(t_status *status, t_line *line);
 int				need_trim_line(t_line *line);
 void			put_pixel(t_mlx *mlx, t_line *line);
 
-void			redraw(t_global *global);
 void			loop(t_global *global);
+void			draw(t_global *global);
+void			update_info_only(t_global *global);
 void			count_frames(t_mlx *mlx, struct timeval start,
 				struct timeval end);
 
-int				keyboard_key_press(int key, void *param);
-int				mouse_key_press(int key, int x, int y, void *param);
-int				mouse_key_release(int key, int x, int y, void *param);
-int				mouse_move(int x, int y, void *param);
-int				close_window(void *param);
+int				keyboard_key_press(int key, t_global *global);
+int				mouse_key_press(int key, int x, int y, t_global *global);
+int				mouse_key_release(int key, int x, int y, t_global *global);
+int				mouse_move(int x, int y, t_global *global);
+int				close_window(t_global *global);
 
-void			get_cursor_position(t_status *status, int x, int y);
+void			get_mouse_position(t_status *status, int x, int y);
 void			control_shift(t_status *status, int key);
 void			control_mouse_shift(t_status *status, int x, int y);
 void			control_rotation(t_status *status, int key);
@@ -275,7 +277,7 @@ void			control_z_scale_plus(t_status *status);
 void			control_z_scale_minus(t_status *status);
 void			control_colors(t_map *map, t_status *status);
 
-void			put_info_to_window(t_map *map, t_status *status, t_mlx *mlx);
+void			put_info_to_window(t_global *global);
 void			put_map_summary_1(t_map *map, t_mlx *mlx);
 void			put_map_summary_2(t_map *map, t_mlx *mlx);
 void			put_map_summary_3(t_map *map, t_mlx *mlx);

@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:37:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 04:06:29 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 20:12:08 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	put_status_1(t_status *status, t_mlx *mlx)
 	char	*str;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 330;
+	pos_y = 380;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 70, pos_y, TEXT_COLOR,
 	"STATUS");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 30, TEXT_COLOR,
@@ -47,7 +47,7 @@ void	put_status_2(t_status *status, t_mlx *mlx)
 	char	*str;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 330;
+	pos_y = 380;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 150, pos_y + 80, TEXT_COLOR,
 	str = ft_itoa(rad_to_deg(status->x_angle)));
 	free(str);
@@ -74,7 +74,7 @@ void	put_status_3(t_status *status, t_mlx *mlx)
 	char	*str;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 330;
+	pos_y = 380;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 150, TEXT_COLOR,
 	str = ft_itoa(100 * (status->sf / status->sf_init)));
 	free(str);
@@ -102,7 +102,7 @@ void	put_status_4(t_status *status, t_mlx *mlx)
 	char	*str;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 330;
+	pos_y = 380;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 70, pos_y + 220, TEXT_COLOR,
 	"rate:");
 	if (status->perspective_projection == 1)
@@ -125,7 +125,7 @@ void	put_status_5(t_status *status, t_mlx *mlx)
 	int		pos_y;
 
 	pos_x = WIN_SIZE_W - 340;
-	pos_y = 330;
+	pos_y = 380;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 240,
 	TEXT_COLOR, "Color:");
 	if (status->color_scheme == 0)

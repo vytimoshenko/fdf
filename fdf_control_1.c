@@ -6,13 +6,13 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 03:36:47 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 19:51:59 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	get_cursor_position(t_status *status, int x, int y)
+void	get_mouse_position(t_status *status, int x, int y)
 {
 	status->x_mouse = x - IMG_INDT_W;
 	status->y_mouse = y - IMG_INDT_H;
@@ -32,7 +32,7 @@ void	control_shift(t_status *status, int key)
 		status->x_shift += 0.1 * IMG_SIZE_W;
 	else if (key == W && status->y_shift >= -IMG_SIZE_H / 2)
 		status->y_shift -= 0.1 * IMG_SIZE_W;
-	if (key == S && status->y_shift <= IMG_SIZE_H / 2)
+	else if (key == S && status->y_shift <= IMG_SIZE_H / 2)
 		status->y_shift += 0.1 * IMG_SIZE_W;
 }
 
