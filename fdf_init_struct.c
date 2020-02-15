@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:34:38 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 23:26:07 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 02:25:28 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,14 @@ t_map		*init_map(int argc, char **argv)
 {
 	t_map *map;
 
-	if (argc != 2)
-		ft_put_error("usage: fdf map_name.fdf");
+	if (argc != 2 && argc != 3)
+		ft_put_error("usage: fdf map_name.fdf map_name.fdf_save (optional)");
 	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))))
 		ft_put_errno(PROGRAM_NAME);
 	check_map(map, argv[1]);
 	read_map(map, argv[1]);
+	if (argc == 3)
+		load_saved_status(map, argv[2]);
 	return (map);
 }
 
@@ -31,11 +33,16 @@ t_status	*init_status(t_map *map)
 
 	if (!(status = (t_status *)ft_memalloc(sizeof(t_status))))
 		ft_put_errno(PROGRAM_NAME);
-	calc_scale(map, status);
-	full_reset(map, status);
+	if (map->loaded_save)
+		status = (t_status *)map->loaded_save;
+	else
+	{
+		calc_scale(map, status);
+		full_reset(map, status);
+	}
 	return (status);
 }
-	
+
 t_mlx		*init_mlx(void)
 {
 	t_mlx	*mlx;
@@ -64,4 +71,4 @@ t_mlx		*init_mlx(void)
 	clear_background(mlx);
 	init_z_buffer(mlx);
 	return (mlx);
-}	
+}

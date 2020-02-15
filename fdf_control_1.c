@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 19:51:59 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 02:35:48 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,28 @@ void	control_rotation(t_status *status, int key)
 		status->z_angle += deg_to_rad(5);
 	else if (key == LESS && rad_to_deg(status->z_angle) > -180)
 		status->z_angle -= deg_to_rad(5);
+}
+
+void	save_status(t_status *status)
+{
+	int 	fd;
+	char	*file_name;
+	char	*tmp1;
+	char	*tmp2;
+
+	tmp1 = ft_itoa(status->save_num);
+	tmp2 = ft_strjoin("_", tmp1);
+	free(tmp1);
+	tmp1 = ft_strjoin(tmp2, ".fdf-save");
+	free(tmp2);
+	tmp2 = ft_strjoin(PROGRAM_NAME, tmp1);
+	free(tmp1);
+	file_name = ft_strjoin(SAVE_PATH, tmp2);
+	free(tmp2);
+	if (!(fd = open(file_name, O_RDWR | O_CREAT)))
+		ft_put_errno(PROGRAM_NAME);
+	free(file_name);
+	write(fd, (void *)status, sizeof(*status));
+    close(fd);
+	++status->save_num;
 }

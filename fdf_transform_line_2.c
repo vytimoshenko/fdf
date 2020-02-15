@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 17:19:51 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 23:23:46 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 00:23:07 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,15 @@ int		need_trim_line(t_line *line)
 		return (0);
 }
 
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+// pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void	put_pixel(t_mlx *mlx, t_line *line)
 {
 	if (line->current->x > IMG_INDT_W && line->current->x < IMG_SIZE_W
 	&& line->current->y > IMG_INDT_W && line->current->y < IMG_SIZE_H)
 	{
-		// if (pthread_mutex_lock(&mlx->mutex[(int)(IMG_SIZE_W * (line->current->y - 1) +
-		// line->current->x)]))
+		// if (pthread_mutex_lock(&mlx->mutex[(int)(IMG_SIZE_W *
+		// (line->current->y - 1) + line->current->x)]))
 		// 	ft_put_error("fdf: pthread_mutex_lock error");
 		// pthread_mutex_lock(&mutex);
 		if (mlx->z_buffer[(int)(IMG_SIZE_W * (line->current->y - 1) +
@@ -68,8 +68,8 @@ void	put_pixel(t_mlx *mlx, t_line *line)
 		line->current->x)] = line->current->z;
 		}
 		// pthread_mutex_unlock(&mutex);
-		// if (pthread_mutex_unlock(&mlx->mutex[(int)(IMG_SIZE_W * (line->current->y - 1) +
-		// line->current->x)]))
+		// if (pthread_mutex_unlock(&mlx->mutex[(int)(IMG_SIZE_W *
+		// (line->current->y - 1) + line->current->x)]))
 		// 	ft_put_error("fdf: pthread_mutex_lock error");
 	}
 }

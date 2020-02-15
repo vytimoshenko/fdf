@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 23:32:28 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 02:08:10 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 
 # define FDF_H
 
-# define PROGRAM_NAME "fdf"
+# include "./libft/libft.h"
+# include "./mlx/mlx.h"
+# include <sys/time.h>
+# include <pthread.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
+# include <math.h>
+# include <fcntl.h>
+
+# define PROGRAM_NAME			"fdf"
+
+# define SAVE_PATH				"./saves/"
 
 # define WIN_SIZE_W 			2560
 # define WIN_SIZE_H 			1400
@@ -64,6 +76,7 @@
 # define P						35
 # define RETURN					36
 # define LESS					43
+# define N						45
 # define MORE					47
 # define SPACE					49
 # define ESC					53
@@ -78,38 +91,28 @@
 
 # define PI 3.14159265
 
-# include "./libft/libft.h"
-# include "./mlx/mlx.h"
-# include <sys/time.h>
-# include <pthread.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <math.h>
-# include <fcntl.h>
-
-typedef	struct	s_point
+typedef	struct		s_point
 {
 	double			x;
 	double			y;
 	double			z;
 
 	int				color;
-}				t_point;
+}					t_point;
 
-typedef struct	s_line
+typedef struct		s_line
 {
-	t_point 		*start;
-	t_point 		*end;
-	t_point 		*current;
+	t_point			*start;
+	t_point			*end;
+	t_point			*current;
 
 	int				x;
 	int				y;
 	int				dx;
 	int				dy;
-}				t_line;
+}					t_line;
 
-typedef struct	s_map
+typedef struct		s_map
 {
 	int				**xyz;
 	int				**clr;
@@ -123,9 +126,11 @@ typedef struct	s_map
 	int				z_size;
 	int				z_min;
 	int				z_max;
-}				t_map;
 
-typedef struct	s_status
+	void			*loaded_save;
+}					t_map;
+
+typedef struct		s_status
 {
 	double			sf;
 	double			sf_init;
@@ -133,6 +138,8 @@ typedef struct	s_status
 	double			sf_z_init;
 	int				persp_rate;
 	int				color_scheme;
+
+	int				save_num;
 
 	int				straight_projection;
 	int				isometric_projection;
@@ -157,9 +164,9 @@ typedef struct	s_status
 	int				x_move;
 	int				y_move;
 	int				middle_mouse_button;
-}				t_status;
+}					t_status;
 
-typedef struct	s_mlx
+typedef struct		s_mlx
 {
 	void			*mlx;
 	void			*win;
@@ -177,124 +184,129 @@ typedef struct	s_mlx
 	int				frames;
 	int				fps;
 	double			frame_time;
-}				t_mlx;
+}					t_mlx;
 
-typedef struct	s_global
+typedef struct		s_global
 {
-	t_map		*map;
-	t_status	*status;
-	t_mlx		*mlx;
-}				t_global;
+	t_map			*map;
+	t_status		*status;
+	t_mlx			*mlx;
+}					t_global;
 
-int				main(int argc, char **argv);
+int					main(int argc, char **argv);
 
-t_map			*init_map(int argc, char **argv);
-t_status		*init_status(t_map *map);
-t_mlx			*init_mlx(void);
+t_map				*init_map(int argc, char **argv);
+t_status			*init_status(t_map *map);
+t_mlx				*init_mlx(void);
 
-void			check_map(t_map *map, char *file_name);
-void			check_line(t_map *map, char *line);
+void				check_map(t_map *map, char *file_name);
+void				check_line(t_map *map, char *line);
 
-void			read_map(t_map *map, char *file_name);
-void			split_line(t_map *map, char *line, int y);
-void			trim_file_name(t_map *map, char *file_name);
-void			get_max_min_z(t_map *map, int x, int y);
+void				load_saved_status(t_map *map, char *file_name);
+void				read_map(t_map *map, char *file_name);
+void				split_line(t_map *map, char *line, int y);
+void				trim_file_name(t_map *map, char *file_name);
+void				get_max_min_z(t_map *map, int x, int y);
 
-void			save_map_line(t_map *map, char **split_line, int y);
-void			separate_color(t_map *map, char **split_line, int x, int y);
-int				atoi_color(char *str);
-int				atoi_mod(const char *str);
-void			check_color(char *color);
+void				save_map_line(t_map *map, char **split_line, int y);
+void				separate_color(t_map *map, char **split_line, int x, int y);
+int					atoi_color(char *str);
+int					atoi_mod(const char *str);
+void				check_color(char *color);
 
-void			calc_scale(t_map *map, t_status *status);
-void			reset_shift_and_scale(t_status *status);
-void			full_reset(t_map *map, t_status *status);
+void				calc_scale(t_map *map, t_status *status);
+void				reset_shift_and_scale(t_status *status);
+void				full_reset(t_map *map, t_status *status);
 
-void			clear_background(t_mlx *mlx);
-void			init_z_buffer(t_mlx *mlx);
-void			clean_z_buffer(t_mlx *mlx);
-void			clean_mlx(t_mlx *mlx);
+void				clear_background(t_mlx *mlx);
+void				init_z_buffer(t_mlx *mlx);
+void				clean_z_buffer(t_mlx *mlx);
+void				clean_mlx(t_mlx *mlx);
 
-void			draw_image(t_global *global);
-void			*create_verticals(void *global);
-void			*create_horizontals(void *global);
-void			create_ver_line(t_global *global, t_line *line, int x, int y);
-void			create_hor_line(t_global *global, t_line *line, int x, int y);
+void				draw_image(t_global *global);
+void				*create_verticals(void *global);
+void				*create_horizontals(void *global);
+void				create_ver_line(t_global *global, t_line *line, int x,
+					int y);
+void				create_hor_line(t_global *global, t_line *line, int x,
+					int y);
 
-t_line			*init_line(void);
-t_point			*init_point(void);
-void			get_sin_cos(t_status *status);
-void			transform_line(t_status *status, t_line *line);
-void			destroy_line(t_line *line);
+t_line				*init_line(void);
+t_point				*init_point(void);
+void				get_sin_cos(t_status *status);
+void				transform_line(t_status *status, t_line *line);
+void				destroy_line(t_line *line);
 
-void			x_rotate_line(t_status *status, t_line *line);
-void			y_rotate_line(t_status *status, t_line *line);
-void			z_rotate_line(t_status *status, t_line *line);
-void			scale_line(t_status *status, t_line *line);
-void			shift_line(t_status *status, t_line *line);
+void				x_rotate_line(t_status *status, t_line *line);
+void				y_rotate_line(t_status *status, t_line *line);
+void				z_rotate_line(t_status *status, t_line *line);
+void				scale_line(t_status *status, t_line *line);
+void				shift_line(t_status *status, t_line *line);
 
-void			draw_line(t_global *global, t_line *line);
-void			swap_line_ends(t_line *line);
-void			draw_line_low(t_global *global, t_line *line);
-void			draw_line_high(t_global *global, t_line *line);
-void			draw_current_point(t_global *global, t_line *line, int x,
-				int y);
+void				draw_line(t_global *global, t_line *line);
+void				swap_line_ends(t_line *line);
+void				draw_line_low(t_global *global, t_line *line);
+void				draw_line_high(t_global *global, t_line *line);
+void				draw_current_point(t_global *global, t_line *line, int x,
+					int y);
 
-double			get_grade(int start, int end, int current);
-int				get_light(int start, int end, double grade);
-int				get_gradient(t_line *line);
-void			get_z_color(t_map *map, t_status *status, t_point *point);
-void			get_point_color(t_global *global, t_point *point, int x, int y);
+double				get_grade(int start, int end, int current);
+int					get_light(int start, int end, double grade);
+int					get_gradient(t_line *line);
+void				get_z_color(t_map *map, t_status *status, t_point *point);
+void				get_point_color(t_global *global, t_point *point, int x,
+					int y);
 
-void			get_perspective(t_status *status, t_line *line);
-int				need_trim_line(t_line *line);
-void			put_pixel(t_mlx *mlx, t_line *line);
+void				get_perspective(t_status *status, t_line *line);
+int					need_trim_line(t_line *line);
+void				put_pixel(t_mlx *mlx, t_line *line);
 
-void			loop(t_global *global);
-void			draw(t_global *global);
-void			update_info_only(t_global *global);
-void			count_frames(t_mlx *mlx, struct timeval start,
-				struct timeval end);
+void				loop(t_global *global);
+void				draw(t_global *global);
+void				update_info_only(t_global *global);
+void				count_frames(t_mlx *mlx, struct timeval start,
+					struct timeval end);
 
-int				keyboard_key_press(int key, t_global *global);
-int				mouse_key_press(int key, int x, int y, t_global *global);
-int				mouse_key_release(int key, int x, int y, t_global *global);
-int				mouse_move(int x, int y, t_global *global);
-int				close_window(t_global *global);
+int					keyboard_key_press(int key, t_global *global);
+int					mouse_key_press(int key, int x, int y, t_global *global);
+int					mouse_key_release(int key, int x, int y, t_global *global);
+int					mouse_move(int x, int y, t_global *global);
+int					close_window(t_global *global);
 
-void			get_mouse_position(t_status *status, int x, int y);
-void			control_shift(t_status *status, int key);
-void			control_mouse_shift(t_status *status, int x, int y);
-void			control_rotation(t_status *status, int key);
+void				get_mouse_position(t_status *status, int x, int y);
+void				control_shift(t_status *status, int key);
+void				control_mouse_shift(t_status *status, int x, int y);
+void				control_rotation(t_status *status, int key);
+void				save_status(t_status *status);
 
-void			control_projections(t_status *status, int key);
-void			straight_projections(t_status *status);
-void			isometric_projections(t_status *status);
-void			control_perspective(t_status *status, int key);
+void				control_projections(t_status *status, int key);
+void				straight_projections(t_status *status);
+void				isometric_projections(t_status *status);
+void				control_perspective(t_status *status, int key);
 
-void			control_scale(t_status *status, int key);
-void			control_z_scale(t_status *status, int key);
-void			control_z_scale_plus(t_status *status);
-void			control_z_scale_minus(t_status *status);
-void			control_colors(t_map *map, t_status *status);
+void				control_scale(t_status *status, int key);
+void				control_z_scale(t_status *status, int key);
+void				control_z_scale_plus(t_status *status);
+void				control_z_scale_minus(t_status *status);
+void				control_colors(t_map *map, t_status *status);
 
-void			put_info_to_window(t_global *global);
-void			put_map_summary_1(t_map *map, t_mlx *mlx);
-void			put_map_summary_2(t_map *map, t_mlx *mlx);
-void			put_map_summary_3(t_map *map, t_mlx *mlx);
+void				put_info_to_window(t_global *global);
+void				put_map_summary_1(t_map *map, t_mlx *mlx);
+void				put_map_summary_2(t_map *map, t_mlx *mlx);
+void				put_map_summary_3(t_map *map, t_mlx *mlx);
 
-void			put_status_1(t_status *status, t_mlx *mlx);
-void			put_status_2(t_status *status, t_mlx *mlx);
-void			put_status_3(t_status *status, t_mlx *mlx);
-void			put_status_4(t_status *status, t_mlx *mlx);
-void			put_status_5(t_status *status, t_mlx *mlx);
+void				put_status_1(t_status *status, t_mlx *mlx);
+void				put_status_2(t_status *status, t_mlx *mlx);
+void				put_status_3(t_status *status, t_mlx *mlx);
+void				put_status_4(t_status *status, t_mlx *mlx);
+void				put_status_5(t_status *status, t_mlx *mlx);
 
-void			put_control_keys_1(t_mlx *mlx);
-void			put_control_keys_2(t_mlx *mlx);
-void			put_render_info_1(t_mlx *mlx);
-void			put_render_info_2(t_mlx *mlx);
-void			put_mouse_position(t_status *status, t_mlx *mlx);
+void				put_control_keys_1(t_mlx *mlx);
+void				put_control_keys_2(t_mlx *mlx);
+void				put_render_info_1(t_mlx *mlx);
+void				put_render_info_2(t_mlx *mlx);
+void				put_mouse_position(t_status *status, t_mlx *mlx);
 
-double			deg_to_rad(int degrees);
-int				rad_to_deg(double radians);
+double				deg_to_rad(int degrees);
+int					rad_to_deg(double radians);
 #endif

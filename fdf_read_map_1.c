@@ -6,11 +6,33 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:13:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 03:37:19 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 02:55:03 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	load_saved_status(t_map *map, char *file_name)
+{
+	int		fd;
+	int		ret;
+	// char	*buf;
+
+	ret = 1;
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0 || read(fd, NULL, 0) == -1)
+		ft_put_error(PROGRAM_NAME);
+	close(fd);
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+		ft_put_error(PROGRAM_NAME);
+	if (!(ret = read(fd, map->loaded_save, BUFF_SIZE)))
+		ft_put_error(PROGRAM_NAME);
+	printf("%d", ret);
+	// if (!(get_next_line(fd, map->loaded_save)))
+	// 	ft_put_errno(PROGRAM_NAME);
+	close(fd);
+}
 
 void	get_max_min_z(t_map *map, int x, int y)
 {
@@ -78,4 +100,5 @@ void	read_map(t_map *map, char *file_name)
 	}
 	map->points = map->y_size * map->x_size;
 	trim_file_name(map, file_name);
+	close(fd);
 }

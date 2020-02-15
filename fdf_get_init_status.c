@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:44:45 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 04:15:45 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 02:04:42 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	calc_scale(t_map *map, t_status *status)
 		status->sf_z_init = 0.1;
 	if (map->z_size > 1000)
 		status->sf_z_init = 0.01;
-
 }
 
 void	reset_shift_and_scale(t_status *status)

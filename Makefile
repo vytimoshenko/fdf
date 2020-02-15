@@ -6,7 +6,7 @@
 #    By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 19:45:56 by hlorrine          #+#    #+#              #
-#    Updated: 2020/02/15 23:31:35 by mperseus         ###   ########.fr        #
+#    Updated: 2020/02/16 00:43:41 by mperseus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,8 @@ CL_MLX	=	make clean -C mlx
 
 ADD_ERR =	-Wall -Wextra -Werror
 
+MK_DIR	=	@/bin/mkdir saves
+
 ADD_OPT =	-Ofast
 
 ADD_LIB =	-L ./libft	-l ft\
@@ -62,6 +64,7 @@ $(NAME):	$(OBJ)
 			$(MK_FT)
 			$(MK_MLX)
 			gcc -o $(NAME) $(OBJ) $(ADD_ERR) $(ADD_OPT) $(ADD_LIB) $(ADD_FMW)
+			$(MK_DIR)
 
 %.o: %.c
 			gcc -I $(HDR) $< -c -o $@ $(ADD_ERR) $(ADD_OPT)
@@ -70,6 +73,7 @@ clean:
 			@/bin/rm -f $(OBJ)
 			$(CL_FT)
 			$(CL_MLX)
+			@/bin/rm -rf saves
 
 fclean: 	clean
 			@/bin/rm -f $(NAME)
