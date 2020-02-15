@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 23:20:57 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 23:32:28 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@
 # define PI 3.14159265
 
 # include "./libft/libft.h"
-# include "mlx.h"
+# include "./mlx/mlx.h"
 # include <sys/time.h>
 # include <pthread.h>
 # include <unistd.h>

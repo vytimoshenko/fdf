@@ -6,7 +6,7 @@
 #    By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 19:45:56 by hlorrine          #+#    #+#              #
-#    Updated: 2020/02/15 02:08:27 by mperseus         ###   ########.fr        #
+#    Updated: 2020/02/15 23:31:35 by mperseus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,14 +39,19 @@ SRC		= 	fdf_main.c				\
 
 OBJ		= 	$(SRC:.c=.o)
 
-LIB		=	make -C libft
+MK_FT	=	make -C libft
+CL_FT	=	make clean -C libft
+FCL_FT	=	make fclean -C libft
+
+MK_MLX	=	make -C mlx
+CL_MLX	=	make clean -C mlx
 
 ADD_ERR =	-Wall -Wextra -Werror
 
 ADD_OPT =	-Ofast
 
-ADD_LIB =	-L./libft -lft\
-			-L/usr/local/lib/
+ADD_LIB =	-L ./libft	-l ft\
+			-L ./mlx	-l mlx
 			
 ADD_FMW =	-lmlx -framework OpenGL -framework AppKit\
 			-lpthread
@@ -54,7 +59,8 @@ ADD_FMW =	-lmlx -framework OpenGL -framework AppKit\
 all:		$(NAME)
 
 $(NAME):	$(OBJ)
-			$(LIB)
+			$(MK_FT)
+			$(MK_MLX)
 			gcc -o $(NAME) $(OBJ) $(ADD_ERR) $(ADD_OPT) $(ADD_LIB) $(ADD_FMW)
 
 %.o: %.c
@@ -62,9 +68,12 @@ $(NAME):	$(OBJ)
 
 clean:
 			@/bin/rm -f $(OBJ)
+			$(CL_FT)
+			$(CL_MLX)
 
 fclean: 	clean
 			@/bin/rm -f $(NAME)
+			$(FCL_FT)
 
 re: 		fclean all
 
