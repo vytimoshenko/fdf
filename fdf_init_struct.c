@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:34:38 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 02:19:30 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 23:26:07 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,11 @@ t_status	*init_status(t_map *map)
 	full_reset(map, status);
 	return (status);
 }
-
+	
 t_mlx		*init_mlx(void)
 {
-	t_mlx *mlx;
+	t_mlx	*mlx;
+	// int		i;
 
 	if (!(mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
 		ft_put_errno(PROGRAM_NAME);
@@ -51,20 +52,16 @@ t_mlx		*init_mlx(void)
 		ft_put_error("fdf: mlx_new_image error");
 	mlx->data = (int *)mlx_get_data_addr(mlx->img, &(mlx->bits_per_pixel),
 	&(mlx->size_line), &(mlx->endian));
+	// if (!(mlx->mutex = (pthread_mutex_t *)ft_memalloc(sizeof(pthread_mutex_t)
+	// * IMG_SIZE_W * IMG_SIZE_H)))
+	// 	ft_put_errno(PROGRAM_NAME);
+	// i = -1;
+	// while (++i < IMG_SIZE_W * IMG_SIZE_H)
+	// {
+	// 	if (pthread_mutex_init(&mlx->mutex[i], NULL))
+	// 		ft_put_error("fdf: pthread_mutex_init error");
+	// }
 	clear_background(mlx);
 	init_z_buffer(mlx);
 	return (mlx);
-}
-
-t_global	*init_global(int argc, char **argv)
-{
-	t_global *global;
-
-	if (!(global = (t_global *)ft_memalloc(sizeof(t_global))))
-		ft_put_errno(PROGRAM_NAME);
-	global->map = init_map(argc, argv);
-	global->status = init_status(global->map);
-	global->mlx = init_mlx();
-	return (global);
-}
-	
+}	

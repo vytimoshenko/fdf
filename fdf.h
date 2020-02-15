@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 20:06:30 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 23:20:57 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,91 +90,93 @@
 
 typedef	struct	s_point
 {
-	double		x;
-	double		y;
-	double		z;
+	double			x;
+	double			y;
+	double			z;
 
-	int			color;
+	int				color;
 }				t_point;
 
 typedef struct	s_line
 {
-	t_point 	*start;
-	t_point 	*end;
-	t_point 	*current;
+	t_point 		*start;
+	t_point 		*end;
+	t_point 		*current;
 
-	int			x;
-	int			y;
-	int			dx;
-	int			dy;
+	int				x;
+	int				y;
+	int				dx;
+	int				dy;
 }				t_line;
 
 typedef struct	s_map
 {
-	int			**xyz;
-	int			**clr;
+	int				**xyz;
+	int				**clr;
 
-	char		*map_name;
-	int			has_color;
+	char			*map_name;
+	int				has_color;
 
-	int			points;
-	int			x_size;
-	int			y_size;
-	int			z_size;
-	int			z_min;
-	int			z_max;
+	int				points;
+	int				x_size;
+	int				y_size;
+	int				z_size;
+	int				z_min;
+	int				z_max;
 }				t_map;
 
 typedef struct	s_status
 {
-	double		sf;
-	double		sf_init;
-	double		sf_z;
-	double		sf_z_init;
-	int			persp_rate;
-	int			color_scheme;
+	double			sf;
+	double			sf_init;
+	double			sf_z;
+	double			sf_z_init;
+	int				persp_rate;
+	int				color_scheme;
 
-	int			straight_projection;
-	int			isometric_projection;
-	int			perspective_projection;
+	int				straight_projection;
+	int				isometric_projection;
+	int				perspective_projection;
 
-	double		x_angle;
-	double		y_angle;
-	double		z_angle;
+	double			x_angle;
+	double			y_angle;
+	double			z_angle;
 
-	int			x_shift;
-	int			y_shift;
+	int				x_shift;
+	int				y_shift;
 
-	double		sin_x;
-	double		sin_y;
-	double		sin_z;
-	double		cos_x;
-	double		cos_y;
-	double		cos_z;
+	double			sin_x;
+	double			sin_y;
+	double			sin_z;
+	double			cos_x;
+	double			cos_y;
+	double			cos_z;
 
-	int			x_mouse;
-	int			y_mouse;
-	int			x_move;
-	int			y_move;
-	int			middle_mouse_button;
+	int				x_mouse;
+	int				y_mouse;
+	int				x_move;
+	int				y_move;
+	int				middle_mouse_button;
 }				t_status;
 
 typedef struct	s_mlx
 {
-	void		*mlx;
-	void		*win;
-	void		*img;
-	int			*data;
+	void			*mlx;
+	void			*win;
+	void			*img;
+	int				*data;
 
-	int			bits_per_pixel;
-	int			size_line;
-	int			endian;
+	int				bits_per_pixel;
+	int				size_line;
+	int				endian;
 
-	int			*z_buffer;
+	int				*z_buffer;
 
-	int			frames;
-	int			fps;
-	double		frame_time;
+	pthread_mutex_t	*mutex;
+
+	int				frames;
+	int				fps;
+	double			frame_time;
 }				t_mlx;
 
 typedef struct	s_global
@@ -189,7 +191,6 @@ int				main(int argc, char **argv);
 t_map			*init_map(int argc, char **argv);
 t_status		*init_status(t_map *map);
 t_mlx			*init_mlx(void);
-t_global		*init_global(int argc, char **argv);
 
 void			check_map(t_map *map, char *file_name);
 void			check_line(t_map *map, char *line);

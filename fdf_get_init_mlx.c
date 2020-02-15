@@ -40,9 +40,16 @@ void	clean_z_buffer(t_mlx *mlx)
 
 void	clean_mlx(t_mlx *mlx)
 {
+	// int i;
+
 	if (mlx)
 	{
 		mlx_destroy_image(mlx->mlx, mlx->img);
 		mlx_destroy_window(mlx->mlx, mlx->win);
+		// i = -1;
+		// while (++i < IMG_SIZE_W * IMG_SIZE_H)
+		// 	pthread_mutex_destroy(&mlx->mutex[i]);
+		ft_memdel((void *)mlx->mutex);
+		ft_memdel((void *)mlx->data);
 	}
 }
