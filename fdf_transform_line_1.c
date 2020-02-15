@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:43:17 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 02:14:26 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:22:11 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	shift_line(t_status *status, t_line *line)
 	int x_align;
 	int y_align;
 
-	x_align = IMG_SIZE_X / 2;
-	y_align = IMG_SIZE_Y / 2;
+	x_align = IMG_SIZE_W / 2;
+	y_align = IMG_SIZE_H / 2;
 	line->start->x = line->start->x + x_align + status->x_shift;
 	line->start->y = line->start->y + y_align + status->y_shift;
 	line->end->x = line->end->x + x_align + status->x_shift;

@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:34:38 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/26 20:04:19 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:19:30 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,24 @@ t_status	*init_status(t_map *map)
 	return (status);
 }
 
-t_view		*init_view(void)
+t_mlx		*init_mlx(void)
 {
-	t_view *view;
+	t_mlx *mlx;
 
-	if (!(view = (t_view *)ft_memalloc(sizeof(t_view))))
+	if (!(mlx = (t_mlx *)ft_memalloc(sizeof(t_mlx))))
 		ft_put_errno(PROGRAM_NAME);
-	if (!(view->mlx_ptr = mlx_init()))
+	if (!(mlx->mlx = mlx_init()))
 		ft_put_error("fdf: mlx_init error");
-	if (!(view->win_ptr = (void *)mlx_new_window(view->mlx_ptr, WIN_SIZE_X,
-	WIN_SIZE_Y, PROGRAM_NAME)))
+	if (!(mlx->win = (void *)mlx_new_window(mlx->mlx, WIN_SIZE_W, WIN_SIZE_H,
+	PROGRAM_NAME)))
 		ft_put_error("fdf: mlx_new_window error");
-	if (!(view->img_ptr = (void *)mlx_new_image(view->mlx_ptr, IMG_SIZE_X,
-	IMG_SIZE_Y)))
+	if (!(mlx->img = (void *)mlx_new_image(mlx->mlx, IMG_SIZE_W, IMG_SIZE_H)))
 		ft_put_error("fdf: mlx_new_image error");
-	view->data = (int *)mlx_get_data_addr(view->img_ptr,
-	&(view->bits_per_pixel), &(view->size_line), &(view->endian));
-	clear_background(view);
-	init_z_buffer(view);
-	return (view);
+	mlx->data = (int *)mlx_get_data_addr(mlx->img, &(mlx->bits_per_pixel),
+	&(mlx->size_line), &(mlx->endian));
+	clear_background(mlx);
+	init_z_buffer(mlx);
+	return (mlx);
 }
 
 t_global	*init_global(int argc, char **argv)
@@ -65,7 +64,7 @@ t_global	*init_global(int argc, char **argv)
 		ft_put_errno(PROGRAM_NAME);
 	global->map = init_map(argc, argv);
 	global->status = init_status(global->map);
-	global->view = init_view();
+	global->mlx = init_mlx();
 	return (global);
 }
 	

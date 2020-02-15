@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:53:42 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 03:23:09 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:09:37 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	draw_current_point(t_global *global, t_line *line, int x, int y)
 		line->current->color = get_gradient(line);
 	else
 		line->current->color = line->start->color;
-	put_pixel(global->view, line);
+	put_pixel(global->mlx, line);
 }
 
 void	draw_line_low(t_global *global, t_line *line)

@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 17:19:51 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/20 20:10:52 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 03:31:28 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,42 @@ void	get_perspective(t_status *status, t_line *line)
 	}
 	else
 	{
-		line->start->x = IMG_SIZE_X + IMG_INDT_X;
-		line->start->y = IMG_SIZE_Y + IMG_INDT_Y;
-		line->end->x = IMG_SIZE_X + IMG_INDT_X;
-		line->end->y = IMG_SIZE_Y + IMG_INDT_Y;
+		line->start->x = IMG_SIZE_W + IMG_INDT_W;
+		line->start->y = IMG_SIZE_H + IMG_INDT_H;
+		line->end->x = IMG_SIZE_W + IMG_INDT_W;
+		line->end->y = IMG_SIZE_H + IMG_INDT_H;
 	}
 }
 
 int		need_trim_line(t_line *line)
 {
-	if ((line->start->x < IMG_INDT_X && line->end->x < IMG_INDT_X) ||
-	(line->start->x > IMG_SIZE_X + IMG_INDT_X &&
-	line->end->x > IMG_SIZE_X + IMG_INDT_X) ||
-	(line->start->y < IMG_INDT_Y && line->end->x < IMG_INDT_Y) ||
-	(line->start->y > IMG_SIZE_Y + IMG_INDT_Y &&
-	line->end->y > IMG_SIZE_Y + IMG_INDT_Y))
+	if ((line->start->x < IMG_INDT_W && line->end->x < IMG_INDT_W) ||
+	(line->start->x > IMG_SIZE_W + IMG_INDT_W &&
+	line->end->x > IMG_SIZE_W + IMG_INDT_W) ||
+	(line->start->y < IMG_INDT_H && line->end->x < IMG_INDT_H) ||
+	(line->start->y > IMG_SIZE_H + IMG_INDT_H &&
+	line->end->y > IMG_SIZE_H + IMG_INDT_H))
 		return (1);
 	else
 		return (0);
 }
 
-void	put_pixel(t_view *view, t_line *line)
+void	put_pixel(t_mlx *mlx, t_line *line)
 {
-	if (line->current->x > IMG_INDT_X && line->current->x < IMG_SIZE_X
-	&& line->current->y > IMG_INDT_Y && line->current->y < IMG_SIZE_Y)
+	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+	
+	pthread_mutex_lock(&mutex);
+	if (line->current->x > IMG_INDT_W && line->current->x < IMG_SIZE_W
+	&& line->current->y > IMG_INDT_W && line->current->y < IMG_SIZE_H)
 	{
-		if (view->z_buffer[(int)(IMG_SIZE_X * (line->current->y - 1) +
+		if (mlx->z_buffer[(int)(IMG_SIZE_W * (line->current->y - 1) +
 		line->current->x)] < line->current->z)
 		{
-			view->data[(int)(IMG_SIZE_X * (line->current->y - 1) +
+			mlx->data[(int)(IMG_SIZE_W * (line->current->y - 1) +
 		line->current->x)] = line->current->color;
-			view->z_buffer[(int)(IMG_SIZE_X * (line->current->y - 1) +
+			mlx->z_buffer[(int)(IMG_SIZE_W * (line->current->y - 1) +
 		line->current->x)] = line->current->z;
 		}
 	}
+	pthread_mutex_unlock(&mutex);
 }

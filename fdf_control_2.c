@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 22:52:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/14 21:56:16 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 04:19:23 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,19 @@ void	control_projections(t_status *status, int key)
 {
 	if (key == RETURN)
 	{
-		isometric_projections(status);
 		if (status->isometric_projection != 3)
 			status->isometric_projection++;
 		else
 			status->isometric_projection = 0;
+		isometric_projections(status);
 	}
-	if (key == SPACE)
+	else if (key == SPACE)
 	{
-		straight_projections(status);
 		if (status->straight_projection != 2)
 			status->straight_projection++;
 		else
 			status->straight_projection = 0;
+		straight_projections(status);
 	}
 }
 
@@ -40,13 +40,13 @@ void	straight_projections(t_status *status)
 		status->y_angle = deg_to_rad(0);
 		status->z_angle = deg_to_rad(0);
 	}
-	if (status->straight_projection == 1)
+	else if (status->straight_projection == 1)
 	{
 		status->x_angle = deg_to_rad(-90);
 		status->y_angle = deg_to_rad(0);
 		status->z_angle = deg_to_rad(0);
 	}
-	if (status->straight_projection == 2)
+	else if (status->straight_projection == 2)
 	{
 		status->x_angle = deg_to_rad(-90);
 		status->y_angle = deg_to_rad(90);
@@ -63,19 +63,19 @@ void	isometric_projections(t_status *status)
 		status->y_angle = deg_to_rad(-30);
 		status->z_angle = deg_to_rad(30);
 	}
-	if (status->isometric_projection == 1)
-	{
-		status->x_angle = deg_to_rad(-150);
-		status->y_angle = deg_to_rad(30);
-		status->z_angle = deg_to_rad(30);
-	}
-	if (status->isometric_projection == 2)
+	else if (status->isometric_projection == 1)
 	{
 		status->x_angle = deg_to_rad(30);
-		status->y_angle = deg_to_rad(-150);
+		status->y_angle = deg_to_rad(-30);
 		status->z_angle = deg_to_rad(150);
 	}
-	if (status->isometric_projection == 3)
+	else if (status->isometric_projection == 2)
+	{
+		status->x_angle = deg_to_rad(30);
+		status->y_angle = deg_to_rad(30);
+		status->z_angle = deg_to_rad(-150);
+	}
+	else if (status->isometric_projection == 3)
 	{
 		status->x_angle = deg_to_rad(-30);
 		status->y_angle = deg_to_rad(30);
@@ -96,10 +96,10 @@ void	control_perspective(t_status *status, int key)
 			status->persp_rate = INIT_PERSPECTIVE_RATE;
 		}
 	}
-	if (key == PAGE_UP && status->perspective_projection == 1 &&
+	else if (key == PAGE_UP && status->perspective_projection == 1 &&
 	status->persp_rate > INIT_PERSPECTIVE_RATE / 4)
 		status->persp_rate /= 2;
-	if (key == PAGE_DOWN && status->perspective_projection == 1 &&
+	else if (key == PAGE_DOWN && status->perspective_projection == 1 &&
 	status->persp_rate < INIT_PERSPECTIVE_RATE)
 		status->persp_rate *= 2;
 }

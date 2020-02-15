@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:56:28 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/13 03:43:04 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 02:09:01 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	draw_image(t_global *global)
 	pthread_t	thr_0;
 	pthread_t	thr_1;
 
-	clean_z_buffer(global->view);
+	clean_z_buffer(global->mlx);
 	get_sin_cos(global->status);
 	pthread_create(&thr_0, NULL, create_verticals, global);
 	pthread_create(&thr_1, NULL, create_horizontals, global);

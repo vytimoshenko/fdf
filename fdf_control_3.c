@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 22:52:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/01/14 22:32:41 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/15 03:58:59 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	control_scale(t_status *status, int key)
 		if (status->sf > status->sf_init * 5)
 			status->sf = status->sf_init * 5;
 	}
-	if ((key == MOUSE_SCROLL_DOWN || key == MINUS)
+	else if ((key == MOUSE_SCROLL_DOWN || key == MINUS)
 	&& status->sf > status->sf_init * 1.05)
 	{
 		status->sf -= 0.05 * status->sf_init;
@@ -30,9 +30,17 @@ void	control_scale(t_status *status, int key)
 	}
 }
 
+void	control_z_scale(t_status *status, int key)
+{
+	if (key == Z)
+		control_z_scale_plus(status);
+	else if (key == X)
+		control_z_scale_minus(status);
+}
+
 void	control_z_scale_plus(t_status *status)
 {
-	if (status->sf_z == 0)
+	if (status->sf_z == 0.0)
 		status->sf_z = 0.01;
 	else if (status->sf_z == 0.01)
 		status->sf_z = 0.03;
@@ -71,15 +79,7 @@ void	control_z_scale_minus(t_status *status)
 	else if (status->sf_z == 0.03)
 		status->sf_z = 0.01;
 	else if (status->sf_z == 0.01)
-		status->sf_z = 0;
-}
-
-void	control_z_scale(t_status *status, int key)
-{
-	if (key == Z)
-		control_z_scale_plus(status);
-	if (key == X)
-		control_z_scale_minus(status);
+		status->sf_z = 0.0;
 }
 
 void	control_colors(t_map *map, t_status *status)
