@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/16 02:35:48 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 20:51:11 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	save_status(t_status *status)
 	char	*tmp1;
 	char	*tmp2;
 
+	++status->save_num;
 	tmp1 = ft_itoa(status->save_num);
 	tmp2 = ft_strjoin("_", tmp1);
 	free(tmp1);
@@ -83,10 +84,10 @@ void	save_status(t_status *status)
 	free(tmp1);
 	file_name = ft_strjoin(SAVE_PATH, tmp2);
 	free(tmp2);
-	if (!(fd = open(file_name, O_RDWR | O_CREAT)))
+	if (!(fd = open(file_name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP
+	| S_IWGRP | S_IROTH | S_IWOTH)))
 		ft_put_errno(PROGRAM_NAME);
 	free(file_name);
 	write(fd, (void *)status, sizeof(*status));
     close(fd);
-	++status->save_num;
 }

@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:13:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/16 02:55:03 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/16 20:29:07 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,17 @@ void	load_saved_status(t_map *map, char *file_name)
 	if (fd < 0 || read(fd, NULL, 0) == -1)
 		ft_put_error(PROGRAM_NAME);
 	close(fd);
-	fd = open(file_name, O_RDONLY);
+	fd = open(file_name, O_RDWR);
 	if (fd < 0)
 		ft_put_error(PROGRAM_NAME);
-	if (!(ret = read(fd, map->loaded_save, BUFF_SIZE)))
+	map->loaded_save = malloc(sizeof(int) * 160);
+		// ft_put_errno(PROGRAM_NAME);
+	if (!(ret = read(fd, map->loaded_save, 160)))
 		ft_put_error(PROGRAM_NAME);
+	close(fd);
 	printf("%d", ret);
 	// if (!(get_next_line(fd, map->loaded_save)))
 	// 	ft_put_errno(PROGRAM_NAME);
-	close(fd);
 }
 
 void	get_max_min_z(t_map *map, int x, int y)
