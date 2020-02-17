@@ -6,7 +6,7 @@
 #    By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 19:45:56 by hlorrine          #+#    #+#              #
-#    Updated: 2020/02/16 00:43:41 by mperseus         ###   ########.fr        #
+#    Updated: 2020/02/17 20:16:25 by mperseus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ ADD_LIB =	-L ./libft	-l ft\
 			
 ADD_FMW =	-lmlx -framework OpenGL -framework AppKit\
 			-lpthread
+			# -fopenmp
 
 all:		$(NAME)
 

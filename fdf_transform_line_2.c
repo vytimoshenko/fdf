@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/19 17:19:51 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/16 00:23:07 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/17 18:06:03 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	put_pixel(t_mlx *mlx, t_line *line)
 		{
 			mlx->data[(int)(IMG_SIZE_W * (line->current->y - 1) +
 		line->current->x)] = line->current->color;
-			mlx->z_buffer[(int)(IMG_SIZE_W * (line->current->y - 1) +
-		line->current->x)] = line->current->z;
+			mlx->z_buffer[((int)(IMG_SIZE_W * (line->current->y - 1) +
+		line->current->x))] = line->current->z;
 		}
 		// pthread_mutex_unlock(&mutex);
 		// if (pthread_mutex_unlock(&mlx->mutex[(int)(IMG_SIZE_W *

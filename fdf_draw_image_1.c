@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:56:28 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/16 00:35:21 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:15:34 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,18 @@ void	draw_image(t_global *global)
 
 	clean_z_buffer(global->mlx);
 	get_sin_cos(global->status);
+	// ft_putnbr((int)sysconf(_SC_NPROCESSORS_ONLN));
 	pthread_create(&thr_0, NULL, create_verticals, global);
 	pthread_create(&thr_1, NULL, create_horizontals, global);
 	pthread_join(thr_0, NULL);
 	pthread_join(thr_1, NULL);
+	// #pragma omp parallel sections
+	// {
+	// 	#pragma omp section
+	// 		create_verticals(global);
+	// 	#pragma omp section
+	// 		create_horizontals(global);
+	// }
 }
 
 void	*create_verticals(void *param)
@@ -35,6 +43,7 @@ void	*create_verticals(void *param)
 	global = (t_global *)param;
 	line = init_line();
 	y = -1;
+	#pragma omp parallel num_threads(4)
 	while (++y <= global->map->y_size - 1)
 	{
 		x = -1;
@@ -42,6 +51,7 @@ void	*create_verticals(void *param)
 			create_ver_line(global, line, x, y);
 	}
 	destroy_line(line);
+	// return (0);
 	pthread_exit(0);
 }
 
@@ -55,6 +65,7 @@ void	*create_horizontals(void *param)
 	global = (t_global *)param;
 	line = init_line();
 	x = -1;
+	#pragma omp parallel num_threads(4)
 	while (++x <= global->map->x_size - 1)
 	{
 		y = -1;
@@ -62,7 +73,8 @@ void	*create_horizontals(void *param)
 			create_hor_line(global, line, x, y);
 	}
 	destroy_line(line);
-	pthread_exit(0);
+	return (0);
+	// pthread_exit(0);
 }
 
 void	create_ver_line(t_global *global, t_line *line, int x, int y)
