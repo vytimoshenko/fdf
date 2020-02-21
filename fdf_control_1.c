@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 04:41:13 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 22:22:28 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	control_rotation(t_status *status, int key)
 
 void	save_status(t_map *map, t_status *status, t_mlx *mlx)
 {
-	int 	fd;
+	int		fd;
 	char	*file_name;
 	char	*tmp1;
 	char	*tmp2;

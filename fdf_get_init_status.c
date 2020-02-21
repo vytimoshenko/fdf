@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:44:45 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:06:30 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 22:20:25 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_status	*init_status(t_map *map)
 	return (status);
 }
 
-void	calc_scale(t_map *map, t_status *status)
+void		calc_scale(t_map *map, t_status *status)
 {
 	float sf;
 
@@ -44,14 +44,14 @@ void	calc_scale(t_map *map, t_status *status)
 		status->sf_z_init = 0.01;
 }
 
-void	reset_shift_and_scale(t_status *status)
+void		reset_shift_and_scale(t_status *status)
 {
 	status->x_shift = 0;
 	status->y_shift = 0;
 	status->sf = status->sf_init;
 }
 
-void	full_reset(t_map *map, t_status *status)
+void		full_reset(t_map *map, t_status *status)
 {
 	reset_shift_and_scale(status);
 	status->sf_z = status->sf_z_init;

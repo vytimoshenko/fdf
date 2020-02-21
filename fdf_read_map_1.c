@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:13:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 04:24:06 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 22:19:54 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,34 +46,16 @@ void	get_max_min_z(t_map *map, int x, int y)
 void	trim_file_name(t_map *map, char *file_name_with_path)
 {
 	char	*tmp;
-	char	*file_name;
-	char	*trimmed_file_name;
-	char	*file_name_end;
 
-	if (ft_strrchr(file_name_with_path, '/'))
+	map->map_name_with_path = ft_strdup(file_name_with_path);
+	if ((ft_strrchr(file_name_with_path, '/')))
 	{
 		tmp = ft_strrchr(file_name_with_path, '/');
 		tmp++;
-		file_name = ft_strdup(tmp);
+		map->map_name = ft_strdup(tmp);
 	}
 	else
-		file_name = ft_strdup(file_name_with_path);
-	map->map_name = file_name;
-	if (ft_strlen(file_name) > 16)
-	{
-		tmp = ft_strnew(16);
-		ft_strncpy(tmp, file_name, 16);
-		file_name_end = ft_strnew(3);
-		file_name_end[0] = '.';
-		file_name_end[1] = '.';
-		file_name_end[2] = '.';
-		trimmed_file_name = ft_strjoin(tmp, (char *)file_name_end);
-		ft_strdel(&tmp);
-		ft_strdel(&file_name_end);
-		map->trimmed_map_name = trimmed_file_name;
-	}
-	else
-		map->trimmed_map_name = ft_strdup(file_name);
+		map->map_name = ft_strdup(file_name_with_path);
 }
 
 void	split_line(t_map *map, char *line, int y)

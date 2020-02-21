@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 04:37:56 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 22:22:04 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,6 @@
 # define IMG_SIZE_H 			1370
 # define IMG_INDT_W 			5
 # define IMG_INDT_H 			5
-
-// # define WIN_SIZE_W 			1280
-// # define WIN_SIZE_H 			890
-// # define IMG_SIZE_W 			920
-// # define IMG_SIZE_H 			860
-// # define IMG_INDT_W 			3
-// # define IMG_INDT_H 			3
 
 # define INIT_SCALE_FACTOR		1
 # define INIT_PERSPECTIVE_RATE	2000
@@ -117,9 +110,10 @@ typedef struct		s_map
 	int				**xyz;
 	int				**clr;
 
+	char			*map_name_with_path;
 	char			*map_name;
 	char			*save_name;
-	char			*trimmed_map_name;
+
 	int				opened_save;
 	int				has_color;
 
@@ -179,7 +173,6 @@ typedef struct		s_mlx
 	int				endian;
 
 	int				*z_buffer;
-	// pthread_mutex_t	*mutex;
 
 	int				frames;
 	int				fps;
@@ -293,7 +286,7 @@ void				put_info_to_window(t_global *global);
 void				put_map_summary_1(t_map *map, t_mlx *mlx);
 void				put_map_summary_2(t_map *map, t_mlx *mlx);
 void				put_map_summary_3(t_map *map, t_mlx *mlx);
-void				put_loaded_file_name(t_map *map, t_mlx *mlx);
+void				put_loaded_file_names(t_map *map, t_mlx *mlx);
 
 void				put_status_1(t_status *status, t_mlx *mlx);
 void				put_status_2(t_status *status, t_mlx *mlx);
