@@ -6,7 +6,7 @@
 #    By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/16 19:45:56 by hlorrine          #+#    #+#              #
-#    Updated: 2020/02/17 20:16:25 by mperseus         ###   ########.fr        #
+#    Updated: 2020/02/21 03:06:16 by mperseus         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ SRC		= 	fdf_main.c				\
 			fdf_check_map.c			\
 			fdf_read_map_1.c		\
 			fdf_read_map_2.c		\
-			fdf_init_struct.c		\
 			fdf_get_init_status.c	\
 			fdf_get_init_mlx.c		\
 			fdf_draw_image_1.c		\

@@ -6,11 +6,26 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:00:47 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 02:09:09 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 03:15:45 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+t_map		*init_map(int argc, char **argv)
+{
+	t_map *map;
+
+	if (argc != 2 && argc != 3)
+		ft_put_error("usage: fdf map_name.fdf map_name.fdf-save (optional)");
+	if (!(map = (t_map *)ft_memalloc(sizeof(t_map))))
+		ft_put_errno(PROGRAM_NAME);
+	check_map(map, argv[1]);
+	read_map(map, argv[1]);
+	if (argc == 3)
+		load_saved_status(map, argv[2]);
+	return (map);
+}
 
 void	check_line(t_map *map, char *line)
 {

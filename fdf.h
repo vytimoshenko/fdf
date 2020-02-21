@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/17 18:41:15 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 03:04:20 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@
 # define P						35
 # define RETURN					36
 # define LESS					43
-# define N						45
+# define M						46
 # define MORE					47
 # define SPACE					49
 # define ESC					53
@@ -118,6 +118,8 @@ typedef struct		s_map
 	int				**clr;
 
 	char			*map_name;
+	char			*trimmed_map_name;
+	int				opened_save;
 	int				has_color;
 
 	int				points;
@@ -138,8 +140,6 @@ typedef struct		s_status
 	double			sf_z_init;
 	int				persp_rate;
 	int				color_scheme;
-
-	int				save_num;
 
 	int				straight_projection;
 	int				isometric_projection;
@@ -195,17 +195,15 @@ typedef struct		s_global
 
 int					main(int argc, char **argv);
 
-t_map				*init_map(int argc, char **argv);
-t_status			*init_status(t_map *map);
-t_mlx				*init_mlx(void);
 
+t_map				*init_map(int argc, char **argv);
 void				check_map(t_map *map, char *file_name);
 void				check_line(t_map *map, char *line);
 
 void				load_saved_status(t_map *map, char *file_name);
 void				read_map(t_map *map, char *file_name);
 void				split_line(t_map *map, char *line, int y);
-void				trim_file_name(t_map *map, char *file_name);
+void				trim_file_name(t_map *map, char *file_name_with_path);
 void				get_max_min_z(t_map *map, int x, int y);
 
 void				save_map_line(t_map *map, char **split_line, int y);
@@ -214,10 +212,12 @@ int					atoi_color(char *str);
 int					atoi_mod(const char *str);
 void				check_color(char *color);
 
+t_status			*init_status(t_map *map);
 void				calc_scale(t_map *map, t_status *status);
 void				reset_shift_and_scale(t_status *status);
 void				full_reset(t_map *map, t_status *status);
 
+t_mlx				*init_mlx(void);
 void				clear_background(t_mlx *mlx);
 void				init_z_buffer(t_mlx *mlx);
 void				clean_z_buffer(t_mlx *mlx);
@@ -277,7 +277,7 @@ void				get_mouse_position(t_status *status, int x, int y);
 void				control_shift(t_status *status, int key);
 void				control_mouse_shift(t_status *status, int x, int y);
 void				control_rotation(t_status *status, int key);
-void				save_status(t_status *status);
+void				save_status(t_map *map, t_status *status);
 
 void				control_projections(t_status *status, int key);
 void				straight_projections(t_status *status);

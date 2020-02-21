@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:56:28 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/17 20:15:34 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 00:43:52 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*create_horizontals(void *param)
 	}
 	destroy_line(line);
 	return (0);
-	// pthread_exit(0);
+	pthread_exit(0);
 }
 
 void	create_ver_line(t_global *global, t_line *line, int x, int y)

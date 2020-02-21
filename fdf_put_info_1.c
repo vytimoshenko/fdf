@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:27:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 20:09:59 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 03:06:21 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	put_map_summary_1(t_map *map, t_mlx *mlx)
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 30, TEXT_COLOR,
 	"Name:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 30, TEXT_COLOR,
-	map->map_name);
+	map->trimmed_map_name);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 60, TEXT_COLOR,
 	"Size:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 60, TEXT_COLOR,
@@ -99,5 +99,13 @@ void	put_map_summary_3(t_map *map, t_mlx *mlx)
 		"yes");
 	else
 		mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 210, TEXT_COLOR,
+		"no");
+	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 240,
+	TEXT_COLOR, "Opened save:");
+	if (map->opened_save == 1)
+		mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 240, TEXT_COLOR,
+		"yes");
+	else
+		mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 240, TEXT_COLOR,
 		"no");
 }

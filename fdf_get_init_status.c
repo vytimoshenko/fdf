@@ -6,11 +6,27 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 01:44:45 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/16 02:04:42 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 03:06:30 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+t_status	*init_status(t_map *map)
+{
+	t_status *status;
+
+	if (map->loaded_save)
+		status = (t_status *)map->loaded_save;
+	else
+	{
+		if (!(status = (t_status *)ft_memalloc(sizeof(t_status))))
+			ft_put_errno(PROGRAM_NAME);
+		calc_scale(map, status);
+		full_reset(map, status);
+	}
+	return (status);
+}
 
 void	calc_scale(t_map *map, t_status *status)
 {
