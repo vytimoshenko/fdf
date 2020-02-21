@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/10 03:05:11 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:54:57 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/22 00:14:41 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	put_mouse_position(t_status *status, t_mlx *mlx)
 	char	*str;
 
 	pos_x = IMG_INDT_W + 20;
-	pos_y = WIN_SIZE_H - 25;
+	pos_y = WIN_SIZE_H - 30;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y, TEXT_COLOR, "X:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 20, pos_y,
 	TEXT_COLOR, str = ft_itoa(status->x_mouse));

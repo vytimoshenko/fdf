@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:27:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 22:19:39 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/22 00:14:58 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,15 +101,15 @@ void	put_map_summary_3(t_map *map, t_mlx *mlx)
 
 void	put_loaded_file_names(t_map *map, t_mlx *mlx)
 {
-	mlx_string_put(mlx->mlx, mlx->win, 200, WIN_SIZE_H - 25, TEXT_COLOR,
+	mlx_string_put(mlx->mlx, mlx->win, 200, WIN_SIZE_H - 30, TEXT_COLOR,
 	"map file opened:");
-	mlx_string_put(mlx->mlx, mlx->win, 370, WIN_SIZE_H - 25, TEXT_COLOR,
+	mlx_string_put(mlx->mlx, mlx->win, 370, WIN_SIZE_H - 30, TEXT_COLOR,
 	map->map_name_with_path);
 	if (map->save_name)
 	{
-		mlx_string_put(mlx->mlx, mlx->win, 1000, WIN_SIZE_H - 25, TEXT_COLOR,
+		mlx_string_put(mlx->mlx, mlx->win, 1000, WIN_SIZE_H - 30, TEXT_COLOR,
 		"save file loaded:");
-		mlx_string_put(mlx->mlx, mlx->win, 1180, WIN_SIZE_H - 25, TEXT_COLOR,
+		mlx_string_put(mlx->mlx, mlx->win, 1180, WIN_SIZE_H - 30, TEXT_COLOR,
 		map->save_name);
 	}
 }

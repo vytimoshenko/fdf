@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 22:22:28 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/22 00:15:43 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ void	save_status(t_map *map, t_status *status, t_mlx *mlx)
 	| S_IWGRP | S_IROTH | S_IWOTH)))
 		ft_put_errno(PROGRAM_NAME);
 	write(fd, (void *)status, sizeof(*status));
-	mlx_string_put(mlx->mlx, mlx->win, WIN_SIZE_W - 700, WIN_SIZE_H - 25,
+	mlx_string_put(mlx->mlx, mlx->win, WIN_SIZE_W - 700, WIN_SIZE_H - 30,
 	TEXT_COLOR, "file saved:");
-	mlx_string_put(mlx->mlx, mlx->win, WIN_SIZE_W - 580, WIN_SIZE_H - 25,
+	mlx_string_put(mlx->mlx, mlx->win, WIN_SIZE_W - 580, WIN_SIZE_H - 30,
 	TEXT_COLOR, file_name);
 	free(file_name);
 }
