@@ -6,13 +6,13 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:00:47 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:15:45 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 04:40:15 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-t_map		*init_map(int argc, char **argv)
+t_map	*init_map(int argc, char **argv)
 {
 	t_map *map;
 

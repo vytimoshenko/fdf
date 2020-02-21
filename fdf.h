@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:04:20 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 04:37:56 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct		s_map
 	int				**clr;
 
 	char			*map_name;
+	char			*save_name;
 	char			*trimmed_map_name;
 	int				opened_save;
 	int				has_color;
@@ -178,8 +179,7 @@ typedef struct		s_mlx
 	int				endian;
 
 	int				*z_buffer;
-
-	pthread_mutex_t	*mutex;
+	// pthread_mutex_t	*mutex;
 
 	int				frames;
 	int				fps;
@@ -194,7 +194,6 @@ typedef struct		s_global
 }					t_global;
 
 int					main(int argc, char **argv);
-
 
 t_map				*init_map(int argc, char **argv);
 void				check_map(t_map *map, char *file_name);
@@ -277,7 +276,7 @@ void				get_mouse_position(t_status *status, int x, int y);
 void				control_shift(t_status *status, int key);
 void				control_mouse_shift(t_status *status, int x, int y);
 void				control_rotation(t_status *status, int key);
-void				save_status(t_map *map, t_status *status);
+void				save_status(t_map *map, t_status *status, t_mlx *mlx);
 
 void				control_projections(t_status *status, int key);
 void				straight_projections(t_status *status);
@@ -294,6 +293,7 @@ void				put_info_to_window(t_global *global);
 void				put_map_summary_1(t_map *map, t_mlx *mlx);
 void				put_map_summary_2(t_map *map, t_mlx *mlx);
 void				put_map_summary_3(t_map *map, t_mlx *mlx);
+void				put_loaded_file_name(t_map *map, t_mlx *mlx);
 
 void				put_status_1(t_status *status, t_mlx *mlx);
 void				put_status_2(t_status *status, t_mlx *mlx);

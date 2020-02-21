@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:27:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:06:21 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 04:36:22 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	put_info_to_window(t_global *global)
 	put_map_summary_1(global->map, global->mlx);
 	put_map_summary_2(global->map, global->mlx);
 	put_map_summary_3(global->map, global->mlx);
+	put_loaded_file_name(global->map, global->mlx);
 	put_status_1(global->status, global->mlx);
 	put_status_2(global->status, global->mlx);
 	put_status_3(global->status, global->mlx);
@@ -108,4 +109,15 @@ void	put_map_summary_3(t_map *map, t_mlx *mlx)
 	else
 		mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 240, TEXT_COLOR,
 		"no");
+}
+
+void	put_loaded_file_name(t_map *map, t_mlx *mlx)
+{
+	if (map->save_name)
+	{
+		mlx_string_put(mlx->mlx, mlx->win, IMG_INDT_W + 200, WIN_SIZE_H - 25, TEXT_COLOR,
+		"save file loaded:");
+		mlx_string_put(mlx->mlx, mlx->win, IMG_INDT_W + 380, WIN_SIZE_H - 25, TEXT_COLOR,
+		map->save_name);
+	}
 }

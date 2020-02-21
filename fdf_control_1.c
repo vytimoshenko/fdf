@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:18:47 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 04:41:13 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	control_rotation(t_status *status, int key)
 		status->z_angle -= deg_to_rad(5);
 }
 
-void	save_status(t_map *map, t_status *status)
+void	save_status(t_map *map, t_status *status, t_mlx *mlx)
 {
 	int 	fd;
 	char	*file_name;
@@ -82,6 +82,10 @@ void	save_status(t_map *map, t_status *status)
 	if (!(fd = open(file_name, O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR | S_IRGRP
 	| S_IWGRP | S_IROTH | S_IWOTH)))
 		ft_put_errno(PROGRAM_NAME);
-	free(file_name);
 	write(fd, (void *)status, sizeof(*status));
+	mlx_string_put(mlx->mlx, mlx->win, WIN_SIZE_W - 700, WIN_SIZE_H - 25,
+	TEXT_COLOR, "file saved:");
+	mlx_string_put(mlx->mlx, mlx->win, WIN_SIZE_W - 580, WIN_SIZE_H - 25,
+	TEXT_COLOR, file_name);
+	free(file_name);
 }

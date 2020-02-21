@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 19:44:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:03:31 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 04:16:31 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,10 @@ int		keyboard_key_press(int key, t_global *global)
 	else if (key == R)
 		full_reset(global->map, global->status);
 	else if (key == M)
-		save_status(global->map, global->status);
+	{
+		save_status(global->map, global->status, global->mlx);
+		return (0);
+	}
 	else if (key == ESC)
 		close_window(global);
 	else

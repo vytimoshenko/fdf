@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:13:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 03:14:15 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/21 04:24:06 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	load_saved_status(t_map *map, char *file_name)
 	fd = open(file_name, O_RDWR);
 	if (fd < 0)
 		ft_put_errno(PROGRAM_NAME);
+	map->save_name = ft_strdup(file_name);
 	if (!(map->loaded_save = (t_status *)malloc(sizeof(t_status))))
 		ft_put_errno(PROGRAM_NAME);
 	if (!(ret = read(fd, map->loaded_save, sizeof(t_status))))
