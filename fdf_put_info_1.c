@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:27:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/22 00:14:58 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/24 01:25:07 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	put_map_summary_1(t_map *map, t_mlx *mlx)
 	str = ft_itoa(map->points));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 100, pos_y + 60, TEXT_COLOR,
-	"X:");
+	"x:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 60, TEXT_COLOR,
 	str = ft_itoa(map->x_size));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 100, pos_y + 80, TEXT_COLOR,
-	"Y:");
+	"y:");
 }
 
 void	put_map_summary_2(t_map *map, t_mlx *mlx)
@@ -66,17 +66,17 @@ void	put_map_summary_2(t_map *map, t_mlx *mlx)
 	str = ft_itoa(map->y_size));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 100, pos_y + 100, TEXT_COLOR,
-	"Z:");
+	"z:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 100, TEXT_COLOR,
 	str = ft_itoa(map->z_size));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 60, pos_y + 130, TEXT_COLOR,
-	"min Z:");
+	"min z:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 130, TEXT_COLOR,
 	str = ft_itoa(map->z_min));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 60, pos_y + 150, TEXT_COLOR,
-	"max Z:");
+	"max z:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 150, TEXT_COLOR,
 	str = ft_itoa(map->z_max));
 	free(str);

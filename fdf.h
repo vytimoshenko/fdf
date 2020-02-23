@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/22 00:55:25 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/22 18:43:12 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@
 
 # define SAVE_PATH				"./saves/"
 
-# define WIN_SIZE_W 			2880
-# define WIN_SIZE_H 			1580
-# define IMG_SIZE_W 			2510
-# define IMG_SIZE_H 			1540
+// # define WIN_SIZE_W 			2880
+// # define WIN_SIZE_H 			1580
+// # define IMG_SIZE_W 			2510
+// # define IMG_SIZE_H 			1540
 
-// # define WIN_SIZE_W 			2560
-// # define WIN_SIZE_H 			1400
-// # define IMG_SIZE_W 			2190
-// # define IMG_SIZE_H 			1360
+# define WIN_SIZE_W 			2560
+# define WIN_SIZE_H 			1400
+# define IMG_SIZE_W 			2190
+# define IMG_SIZE_H 			1360
 
 // # define WIN_SIZE_W 			1440
 // # define WIN_SIZE_H 			880

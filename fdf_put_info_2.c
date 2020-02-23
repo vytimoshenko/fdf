@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:37:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 22:04:59 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/24 01:25:56 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,19 @@ void	put_status_1(t_status *status, t_mlx *mlx)
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 30, TEXT_COLOR,
 	"Shift:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 30, TEXT_COLOR,
-	"X:");
+	"x:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 150, pos_y + 30, TEXT_COLOR,
 	str = ft_itoa(status->x_shift));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 50, TEXT_COLOR,
-	"Y:");
+	"y:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 150, pos_y + 50, TEXT_COLOR,
 	str = ft_itoa(status->y_shift));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 80, TEXT_COLOR,
 	"Rotation:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 80, TEXT_COLOR,
-	"X:");
+	"x:");
 }
 
 void	put_status_2(t_status *status, t_mlx *mlx)
@@ -52,12 +52,12 @@ void	put_status_2(t_status *status, t_mlx *mlx)
 	str = ft_itoa(rad_to_deg(status->x_angle)));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 100, TEXT_COLOR,
-	"Y:");
+	"y:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 150, pos_y + 100, TEXT_COLOR,
 	str = ft_itoa(rad_to_deg(status->y_angle)));
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 120, TEXT_COLOR,
-	"Z:");
+	"z:");
 	mlx_string_put(mlx->mlx, mlx->win, pos_x + 150, pos_y + 120, TEXT_COLOR,
 	str = ft_itoa(rad_to_deg(status->z_angle)));
 	free(str);
