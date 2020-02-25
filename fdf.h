@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/22 15:47:44 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/22 18:43:12 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/25 04:46:27 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@
 # define INIT_PERSPECTIVE_RATE	2000
 
 # define TEXT_COLOR  			0xFFFFFF
-# define BACK_COLOR  			0x000000
+# define BACKGROUND_COLOR  		0x000000
 
 # define NO_COLOR				0x555555
 
@@ -64,6 +64,13 @@
 # define BOTTOM_COLOR_2 		0x556B2F
 # define MIDDLE_COLOR_2 		0x404040
 # define TOP_COLOR_2			0xFFFFFF
+
+# define FALSE					0
+# define TRUE					1
+
+# define BUTTON_UP				0
+# define BUTTON_DOWN			1
+# define IN_MOVE				2
 
 # define MIDDLE_MOUSE_BUTTON	3
 # define MOUSE_SCROLL_UP		4

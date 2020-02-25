@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:27:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/24 01:25:07 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/25 04:43:57 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	put_map_summary_3(t_map *map, t_mlx *mlx)
 	pos_y = 50;
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 180,
 	TEXT_COLOR, "Color:");
-	if (map->has_color == 1)
+	if (map->has_color == TRUE)
 		mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 180, TEXT_COLOR,
 		"yes");
 	else

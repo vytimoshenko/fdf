@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/16 00:26:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 22:21:45 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/25 04:46:52 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		clear_background(t_mlx *mlx)
 
 	i = -1;
 	while (++i < IMG_SIZE_W * IMG_SIZE_H)
-		mlx->data[i] = BACK_COLOR;
+		mlx->data[i] = BACKGROUND_COLOR;
 }
 
 void		init_z_buffer(t_mlx *mlx)

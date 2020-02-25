@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 19:44:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/21 04:16:31 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/25 04:40:59 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int		mouse_key_press(int key, int x, int y, t_global *global)
 	(void)x;
 	(void)y;
 	if (key == MIDDLE_MOUSE_BUTTON)
-		global->status->middle_mouse_button = 1;
+		global->status->middle_mouse_button = BUTTON_DOWN;
 	else if (key == MOUSE_SCROLL_UP || key == MOUSE_SCROLL_DOWN)
 		control_scale(global->status, key);
 	else
@@ -42,7 +42,7 @@ int		mouse_key_release(int key, int x, int y, t_global *global)
 	(void)x;
 	(void)y;
 	if (key == MIDDLE_MOUSE_BUTTON)
-		global->status->middle_mouse_button = 0;
+		global->status->middle_mouse_button = BUTTON_UP;
 	return (0);
 }
 

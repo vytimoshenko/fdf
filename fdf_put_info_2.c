@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:37:57 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/24 01:25:56 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/25 04:44:33 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	put_status_3(t_status *status, t_mlx *mlx)
 	free(str);
 	mlx_string_put(mlx->mlx, mlx->win, pos_x, pos_y + 200, TEXT_COLOR,
 	"Perspective:");
-	if (status->perspective_projection == 0)
+	if (status->perspective_projection == FALSE)
 		mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 200, TEXT_COLOR,
 		"off");
 	else
@@ -110,8 +110,7 @@ void	put_status_4(t_status *status, t_mlx *mlx)
 		mlx_string_put(mlx->mlx, mlx->win, pos_x + 130, pos_y + 220, TEXT_COLOR,
 		"x");
 		mlx_string_put(mlx->mlx, mlx->win, pos_x + 140, pos_y + 220, TEXT_COLOR,
-		str = ft_itoa((int)(1.0 /
-		((float)(status->persp_rate) / 2000.0))));
+		str = ft_itoa((int)(1.0 / ((float)(status->persp_rate) / 2000.0))));
 		free(str);
 	}
 	else

@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 18:34:41 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/22 00:15:43 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/25 04:46:15 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,13 @@ void	control_shift(t_status *status, int key)
 
 void	control_mouse_shift(t_status *status, int x, int y)
 {
-	if (status->middle_mouse_button == 1)
+	if (status->middle_mouse_button == BUTTON_DOWN)
 	{
 		status->x_move = status->x_shift - x;
 		status->y_move = status->y_shift - y;
-		status->middle_mouse_button = 2;
+		status->middle_mouse_button = IN_MOVE;
 	}
-	else if (status->middle_mouse_button == 2)
+	else if (status->middle_mouse_button == IN_MOVE)
 	{
 		status->x_shift = status->x_move + x;
 		status->y_shift = status->y_move + y;

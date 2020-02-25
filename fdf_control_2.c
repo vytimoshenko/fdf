@@ -6,7 +6,7 @@
 /*   By: mperseus <mperseus@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/02 22:52:00 by mperseus          #+#    #+#             */
-/*   Updated: 2020/02/15 04:19:23 by mperseus         ###   ########.fr       */
+/*   Updated: 2020/02/25 04:46:13 by mperseus         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,11 @@ void	control_perspective(t_status *status, int key)
 {
 	if (key == P)
 	{
-		if (status->perspective_projection == 0)
-			status->perspective_projection = 1;
+		if (status->perspective_projection == FALSE)
+			status->perspective_projection = TRUE;
 		else
 		{
-			status->perspective_projection = 0;
+			status->perspective_projection = FALSE;
 			status->persp_rate = INIT_PERSPECTIVE_RATE;
 		}
 	}
